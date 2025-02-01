@@ -1,17 +1,12 @@
-import { Agent, ZeeWorkflow, createTool } from "@covalenthq/ai-agent-sdk";
-import z, { type ZodType } from "zod";
+
+import { Agent, createTool } from "@covalenthq/ai-agent-sdk";
+import { user } from "@covalenthq/ai-agent-sdk/dist/core/base";
 import "dotenv/config";
+import TelegramBot from "node-telegram-bot-api";
+import { z } from "zod";
+import {getERC20BalanceTool} from "./tools/evm";
 
-const tool = createTool({
-  id: "get-company-report",
-  description: "This tool is used to get the current state of the company",
-  schema: z.object({}),
-  execute: async (params) => {
-      return "The current state of the company is good";
-  },
-});
-
-const agent1 = new Agent({
+const messageAgent = new Agent({
     name: "Agent1",
     model: {
         provider: "OPEN_AI",
@@ -19,23 +14,40 @@ const agent1 = new Agent({
     },
     description: "A helpful AI assistant that can engage in conversation.",
     tools: {
-      'Agent1' : tool,
+        "get-erc20-balance": getERC20BalanceTool,
+    },
+});
+
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, {
+    polling: true,
+});
+
+bot.on("message", (msg) => {
+    const chatId = msg.chat.id;
+    const text = msg.text;
+
+    if (!text) {
+        return;
     }
+
+    const messages = [user(text)];
+
+    messageAgent
+        .generate(messages, { response: z.object({ body: z.string() }) })
+        .then((response) => {
+            if (response.type === "tool_call") {
+                return;
+            }
+
+            const reply =
+                response.value.body || "Sorry, I didn't understand that.";
+            bot.sendMessage(chatId, reply);
+        })
+        .catch((error) => {
+            console.error("Error generating response:", error);
+            bot.sendMessage(
+                chatId,
+                "There was an error processing your request."
+            );
+        });
 });
-
-
-const zee = new ZeeWorkflow({
-    description: "A workflow of agents that do stuff together",
-    output: "Just bunch of stuff",
-    agents: { agent1 },
-});
-
-(async function main() {
-    const result = await agent1.run({
-      agent: "",
-      messages: [],
-      status: "idle",
-      children: []
-    });
-    console.log(result);
-})();

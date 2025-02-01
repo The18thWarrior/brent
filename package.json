@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "ts-node src/services/telegram.ts"
+    "start": "ts-node src/index.ts"
   },
   "keywords": [
     "blockchain",
@@ -42,7 +42,9 @@
   "dependencies": {
     "@covalenthq/ai-agent-sdk": "^0.2.0",
     "@covalenthq/client-sdk": "^2.2.3",
+    "@openzeppelin/contracts": "^5.2.0",
     "dotenv": "^16.4.7",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "viem": "^2.22.17"
   }
 }
