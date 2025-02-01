@@ -107,3 +107,17 @@ Brent: An AI-Powered Multi-Asset Token Purchaser. Automates token purchases on U
 Brent represents a significant leap in automating token transactions, streamlining the process for users across multiple chains. By integrating advanced AI and blockchain technologies, the project not only solves a practical problem but also showcases innovative capabilities in decentralized applications.
 
 This structured plan provides a clear roadmap for development, ensuring all aspects of the project are addressed efficiently within the hackathon timeframe.
+
+
+
+## Workflow
+- Connect wallet - wc-to-telegram (telegram mini-app);
+- Select network - telegram mini-app
+- Get available tokens - graph
+- Select source token - saved in localhost
+- Select target token (validate that LP exists for target token w/ liquidity)
+- Add more tokens to list. 
+- Select total amount for source. 
+- Construct and send transaction. 
+- Display transaction hash
+- Playback previous transaction
