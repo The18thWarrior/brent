@@ -1,5 +1,6 @@
-import 'dotenv/config';
+//import 'dotenv/config';
 import { request, gql } from 'graphql-request';
+
 
 const endpoint = `${process.env.GRAPH_BASE_URL}/${process.env.GRAPH_API_KEY}/subgraphs/id/${process.env.GRAPH_SUBGRAPH_ID}`;
 const poolsQuery = `{
@@ -26,6 +27,7 @@ const query = `{
 
 async function fetchData() {
   try {
+    
     const data = await request(endpoint, query);
     console.log(data);
   } catch (error) {

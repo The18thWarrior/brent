@@ -38,10 +38,11 @@ export const getERC20BalanceTool = createTool({
       chainId: z.number(),
   }),
   execute: async (params) => {
-    if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
-    if (!isAddress(params.tokenAddress)) return "Invalid token address.";
-    if (!isAddress(params.walletAddress)) return "Invalid wallet address.";
+    if (params.chainId !== 137) throw new Error("This tool only supports Polygon mainnet.");
+    if (!isAddress(params.tokenAddress)) throw new Error("Invalid token address.");
+    if (!isAddress(params.walletAddress)) throw new Error("Invalid wallet address.");
     const balance = await getERC20Balance(params.walletAddress, params.tokenAddress, process.env.SAFE_RPC_URL as string);
     return balance.toString();
   },
 });
+

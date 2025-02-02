@@ -1,6 +1,6 @@
 import TelegramBot from 'node-telegram-bot-api';
 import { jest } from '@jest/globals';
-import '../src_old/index';
+import '../bot/index';
 
 jest.mock('node-telegram-bot-api');
 
