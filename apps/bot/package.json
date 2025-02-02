@@ -1,0 +1,59 @@
+{
+  "name": "@brent/bot",
+  "version": "0.2.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bot": "ts-node ./index.ts"
+  },
+  "keywords": [
+    "blockchain",
+    "cryptocurrency",
+    "web3",
+    "blockchain-data",
+    "ai-agent",
+    "ai-agents-framework",
+    "zero-employee-enterprise",
+    "zee",
+    "autonomous-agents",
+    "autonomous-agent-framework",
+    "autonomous-agent-sdk",
+    "ai-agent-sdk"
+  ],
+  "author": "Covalent",
+  "homepage": "https://github.com/covalenthq/ai-agent-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/covalenthq/ai-agent-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/covalenthq/ai-agent-sdk/issues"
+  },
+  "license": "MIT",
+  "description": "A barebones template for creating a new ZEE application.",
+  "devDependencies": {
+    "@brent/tsconfig": "workspace:*",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.0",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@covalenthq/ai-agent-sdk": "^0.2.0",
+    "@covalenthq/client-sdk": "^2.2.3",
+    "@openzeppelin/contracts": "^5.2.0",
+    "@uniswap/sdk-core": "^7.5.0",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-sdk": "^3.24.0",
+    "alchemy-sdk": "^3.5.1",
+    "dotenv": "^16.4.7",
+    "node-telegram-bot-api": "^0.66.0",
+    "openai": "^4.82.0",
+    "viem": "^2.22.17",
+    "zod": "^3.24.1"
+  }
+}
