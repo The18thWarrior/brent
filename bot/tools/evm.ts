@@ -33,9 +33,9 @@ export const getERC20BalanceTool = createTool({
   id: "get-erc20-balance",
   description: "This tool is used to get the current balance of an ERC20 token.",
   schema: z.object({
-      walletAddress: z.string(),
-      tokenAddress: z.string(),
-      chainId: z.number(),
+      walletAddress: z.string().describe("The wallet address to check the balance of."),
+      tokenAddress: z.string().describe("The token address to check the balance of."),
+      chainId: z.number().describe("The chain ID of the network to check the balance on."),
   }),
   execute: async (params) => {
     if (params.chainId !== 137) throw new Error("This tool only supports Polygon mainnet.");

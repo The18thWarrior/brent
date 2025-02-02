@@ -4,16 +4,25 @@ import { computePoolAddress, FeeAmount } from "@uniswap/v3-sdk";
 import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json" with { type: "json" };
 import { Token as UniswapToken } from "@uniswap/sdk-core";
 import { polygon } from "viem/chains";
-import { getTokenMetadata } from "bot/services/alchemy";
+import { getTokenMetadata as alchemyTokenMetadata } from "bot/services/alchemy";
+import { createTool } from "@covalenthq/ai-agent-sdk";
+import { z } from "zod";
 
-const checkUniswapPool = async(content: any) => {
-  const { sourceToken, targetToken, fee, chainId } =
-      content as unknown as {
-          sourceToken: Token;
-          targetToken: Token;
-          fee: number;
-          chainId: number;
-      };
+type CheckUniswapPoolParams = {
+  sourceToken: string, 
+  targetToken: string, 
+  fee: number, 
+  chainId: number,
+};
+
+const checkUniswapPool = async({
+  sourceToken, 
+  targetToken, 
+  fee, 
+  chainId,
+}: CheckUniswapPoolParams) => {
+  const _sourceToken = JSON.parse(sourceToken) as Token;
+  const _targetToken = JSON.parse(targetToken) as Token;
 
   const poolContractMap: Record<number, string> = {
       1: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
@@ -37,18 +46,18 @@ const checkUniswapPool = async(content: any) => {
 
   // Validate input
   if (!sourceToken || !targetToken || !chainId || fee === 0) {
-      return { success: false, message: "Invalid input parameters." };
+      return { success: false, message: "Invalid input parameters.", data: null };
   }
 
   // Adjust if zero addresses
   const sourceAddress =
-      sourceToken.address === zeroAddress
+      _sourceToken.address === zeroAddress
           ? nativeTokens[chainId]
-          : sourceToken.address;
+          : _sourceToken.address;
   const targetAddress =
-      targetToken.address === zeroAddress
+      _targetToken.address === zeroAddress
           ? nativeTokens[chainId]
-          : targetToken.address;
+          : _targetToken.address;
 
   try {
       const poolAddress = computePoolAddress({
@@ -56,14 +65,14 @@ const checkUniswapPool = async(content: any) => {
           tokenA: new UniswapToken(
               chainId,
               sourceAddress,
-              sourceToken.decimals || 18,
-              sourceToken.name || "TokenA"
+              _sourceToken.decimals || 18,
+              _sourceToken.name || "TokenA"
           ),
           tokenB: new UniswapToken(
               chainId,
               targetAddress,
-              targetToken.decimals || 18,
-              targetToken.name || "TokenB"
+              _targetToken.decimals || 18,
+              _targetToken.name || "TokenB"
           ),
           fee: fee as FeeAmount,
       });
@@ -81,8 +90,8 @@ const checkUniswapPool = async(content: any) => {
           .then((liquidity) => {
               const poolData: PoolData = {
                   id: poolAddress,
-                  sourceToken,
-                  targetToken,
+                  sourceToken: _sourceToken,
+                  targetToken: _targetToken,
                   feeTier: fee,
                   liquidity: BigInt(liquidity as bigint).toString(),
               };
@@ -93,37 +102,61 @@ const checkUniswapPool = async(content: any) => {
               };
           })
           .catch((err) => {
-              return { success: false, message: err.message };
+              return { success: false, message: err.message, data: null };
           });
   } catch (error: any) {
       return {
           success: false,
           message: error?.message || "Failed to fetch pool data.",
+          data: null
       };
   }
 }
 
-const autocompleteToken = async(content: any) => {
-  const { query, chainId } = content as unknown as {
-      query: string;
-      chainId: number;
-  };
-  if (!query || !chainId) {
-      return { success: false, message: "Invalid autocomplete request." };
+export const checkUniswapPoolTool = createTool({
+  id: "check-uniswap-pool",
+  description: "This tool is used to check if a Uniswap V3 pool exists for the given token pair.",
+  schema: z.object({
+      sourceToken: z.string().describe("The source token address."), 
+      targetToken: z.string().describe("The target token address."), 
+      fee: z.number().describe("The fee tier of the pool."), 
+      chainId: z.number().describe("The chain ID of the network to check the pool on."),
+  }),
+  execute: async (params) => {
+    if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
+    if (!isAddress(params.sourceToken)) return "Invalid source token address.";
+    if (!isAddress(params.targetToken)) return "Invalid target token address.";
+    const balance = await checkUniswapPool(params);
+    if (!balance.success) return balance.message;
+    if (!balance.data) return "No pool found.";
+    if (balance.data.liquidity === "0") return "Pool found but no liquidity.";
+    return 'Pool found with liquidity: ' + balance.data.liquidity;
+  },
+});
+
+type GetTokenMetadataParams = {
+  tokenAddress: string, 
+  chainId: number
+}
+
+const getTokenMetadata = async({tokenAddress, chainId}: GetTokenMetadataParams) => {
+  if (!tokenAddress || !chainId) {
+      return { success: false, message: "Invalid request: null parameters are not allowed." };
   }
-  if (!isAddress(query)) {
-      return { success: false, message: "Query is not a valid address." };
+  if (!isAddress(tokenAddress)) {
+      return { success: false, message: "Token is not a valid address." };
   }
 
   try {
-      const tokenMetadata = await getTokenMetadata(
-          query,
-          chainId
+      const tokenMetadata = await alchemyTokenMetadata(
+        tokenAddress,
+        chainId
       );
       if (!tokenMetadata) {
           return {
               success: false,
               message: "Not found or invalid token.",
+              data: null
           };
       }
       return {
@@ -135,6 +168,24 @@ const autocompleteToken = async(content: any) => {
       return {
           success: false,
           message: error?.message || "Failed to fetch token metadata.",
+          data: null
       };
   }
 }
+
+export const getTokenMetadataTool = createTool({
+  id: "get-token-metadata",
+  description: "This tool is used to get the metadata of a token.",
+  schema: z.object({
+      tokenAddress: z.string().describe("The token address."), 
+      chainId: z.number().describe("The chain ID of the network to check the token on."),
+  }),
+  execute: async (params) => {
+    if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
+    if (!isAddress(params.tokenAddress)) return "Invalid token address.";
+    const metadata = await getTokenMetadata(params);
+    if (!metadata.success) return metadata.message;
+    if (!metadata.data) return "No token metadata found.";
+    return JSON.stringify(metadata.data);
+  },
+});
