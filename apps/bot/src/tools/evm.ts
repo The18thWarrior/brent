@@ -3,6 +3,7 @@ import {polygon} from "viem/chains";
 import abi from "@openzeppelin/contracts/build/contracts/ERC20.json";
 import { createTool } from "@covalenthq/ai-agent-sdk";
 import { z } from "zod";
+import polygonTokens from '../data/polygon.json'
 
 const getERC20Balance = async (
   walletAddress: string,
@@ -46,3 +47,29 @@ export const getERC20BalanceTool = createTool({
   },
 });
 
+const getTokenList = (chaindId: number, tolerance: 'low' | 'medium' | 'high') => {
+  if (chaindId !== 137) throw new Error("This tool only supports Polygon mainnet.");
+  const tokenList = polygonTokens.tokens.filter((token) => {
+    if (tolerance === 'low') {
+      return token?.risk === 'low' && token?.category !== 'stablecoin';
+    } else if (tolerance === 'medium') {
+      return (token?.risk === 'medium' || token?.risk === 'low') && token?.category !== 'stablecoin';
+    } else if (tolerance === 'high') {
+      return token?.category !== 'stablecoin';
+    }
+    return false;
+  });
+  return JSON.stringify(tokenList);
+}
+
+export const getTokenListTool = createTool({
+  id: "get-token-list",
+  description: "This tool is used to get a list of tokens based on the specified tolerance level.",
+  schema: z.object({
+      chainId: z.number().describe("The chain ID of the network to get the token list from."),
+      tolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level to filter the token list by."),
+  }),
+  execute: async (params) => {
+    return getTokenList(params.chainId, params.tolerance);
+  },
+});

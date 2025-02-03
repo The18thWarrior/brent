@@ -1,7 +1,7 @@
 import { PoolData, Token } from "../services/types";
 import { zeroAddress, getAddress, isAddress, createPublicClient, http } from "viem";
 import { computePoolAddress, FeeAmount } from "@uniswap/v3-sdk";
-import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json" with { type: "json" };
+import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json";
 import { Token as UniswapToken } from "@uniswap/sdk-core";
 import { polygon } from "viem/chains";
 import { getTokenMetadata as alchemyTokenMetadata } from "../services/alchemy";

@@ -9,7 +9,7 @@ import TelegramBot from "node-telegram-bot-api";
 import { z } from "zod";
 import {getERC20BalanceTool} from "../tools/evm";
 
-const agent = new Agent({
+export default new Agent({
     name: "Agent1",
     model: {
         provider: "OPEN_AI",
@@ -24,11 +24,5 @@ const agent = new Agent({
     tools: {
         "get-erc20-balance": getERC20BalanceTool,
     },
-});
-
-export default new ZeeWorkflow({
-  description: "A workflow that evaluates user requests and routes them appropriately.",
-  output: "The goal of this workflow is to provide users with the balance of an ERC20 token.",
-  agents: { agent },
 });
 
