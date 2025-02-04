@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@brent/index-builder": "workspace:*",
+    "@covalenthq/ai-agent-sdk": "^0.2.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.2",
