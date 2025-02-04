@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  },
+  "exclude": ["node_modules"],
+  "extends": "@brent/tsconfig/base.json"
+}

@@ -34,6 +34,7 @@
   "description": "A barebones template for creating a new ZEE application.",
   "devDependencies": {
     "@brent/tsconfig": "workspace:*",
+    "@brent/index-builder": "workspace:*",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.0",
     "@types/node-telegram-bot-api": "^0.64.7",

@@ -18,18 +18,18 @@ export default function Wrapper({
     <Box>
       <ThemeSwitcherProvider>
         <CssBaseline enableColorScheme />
-            <Stack direction={'column'} justifyContent={'space-between'} minHeight={'100dvh'}>
-              <Stack direction={'column'} justifyContent={'flex-start'}>
-                <Header />
-                <Stack direction={'column'} justifyContent={'start'}>
-                  <Stack spacing={2} direction="row" width={'full'} alignItems={'top'}>
-                    <Box flexGrow={1}>
-                      {children}
-                    </Box>
-                  </Stack>              
-                </Stack>
-              </Stack>
+        <Stack direction={'column'} justifyContent={'space-between'} minHeight={'100dvh'}>
+          <Stack direction={'column'} justifyContent={'flex-start'}>
+            <Header />
+            <Stack direction={'column'} justifyContent={'start'}>
+              <Stack spacing={2} direction="row" width={'full'} alignItems={'top'}>
+                <Box flexGrow={1}>
+                  {children}
+                </Box>
+              </Stack>              
             </Stack>
+          </Stack>
+        </Stack>
       </ThemeSwitcherProvider>
     </Box>
   );

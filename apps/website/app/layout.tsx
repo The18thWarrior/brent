@@ -11,6 +11,7 @@ import { createAppKit } from '@reown/appkit/react'
 import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 import { Suspense } from "react";
+import { headers } from 'next/headers' // added
 import ContextProvider from "./context";
 
 // Set up queryClient
@@ -35,6 +36,11 @@ const modal = createAppKit({
   networks: [mainnet, arbitrum, avalanche, base, optimism, polygon],
   defaultNetwork: mainnet,
   metadata: appkitMetadata,
+  themeVariables: {
+    '--w3m-accent': '#084D3E',
+    '--w3m-color-mix': '#084D3E',
+    '--w3m-color-mix-strength': 40
+  },
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
   }
@@ -52,14 +58,14 @@ export const metadata: Metadata = {
   icons: '/favicon.ico'
 };
 
-export default function RootLayout({
-  children,
-  cookies
+export default async function RootLayout({
+  children
 }: {
   children: React.ReactNode;
-  cookies: string | null;
 }) {
-  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
+  
+  const headersObj = await headers();
+  const cookies = headersObj.get('cookie')
   return (
     <html lang="en">
       <body className={`${geistSans.variable}`}>

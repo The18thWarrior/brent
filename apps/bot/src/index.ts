@@ -1,14 +1,10 @@
 
-import { Agent, createTool, ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
+import { ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
 import { StateFn } from "@covalenthq/ai-agent-sdk/dist/core/state";
 import { user, assistant } from "@covalenthq/ai-agent-sdk/dist/core/base";
-import type { ParsedFunctionToolCall } from "openai/resources/beta/chat/completions";
-import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import {createIndexFundFlow} from "@brent/index-builder";
 import "dotenv/config";
 import TelegramBot from "node-telegram-bot-api";
-import { z } from "zod";
-import {getERC20BalanceTool} from "./tools/evm";
-import createIndexFundWorkflow from "./workflows/createIndexFund";
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, {
     polling: true,
@@ -30,14 +26,14 @@ bot.on("message", async (msg) => {
     };
 
     //const messages = [user(text)];
-    const state = await StateFn.root(createIndexFundWorkflow.description);
+    const state = await StateFn.root(createIndexFundFlow.description);
     state.messages.push(
         user(
           text
         )
     );
     try {
-      const response = await ZeeWorkflow.run(createIndexFundWorkflow, state);
+      const response = await ZeeWorkflow.run(createIndexFundFlow, state);
       console.log('initial response generated', response.messages, response.status);
       // if (response.type === "tool_call") {
       //   console.log('tool call');
