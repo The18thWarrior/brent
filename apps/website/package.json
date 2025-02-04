@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -19,20 +19,20 @@
     "@reown/appkit-adapter-wagmi": "^1.6.5",
     "@tanstack/react-query": "^5.66.0",
     "@wagmi/core": "^2.16.3",
-    "next": "15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "viem": "^2.22.17",
-    "wagmi": "^2.14.9"
+    "next": "^14.2.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "viem": "^2.21.45",
+    "wagmi": "^2.12.17"
   },
   "devDependencies": {
     "@brent/tsconfig": "workspace:*",
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "19.0.8",
-    "@types/react-dom": "19.0.3",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.17",
     "eslint": "8.56.0",
-    "eslint-config-next": "15.1.6",
-    "typescript": "5.7.3"
+    "eslint-config-next": "14.0.4",
+    "typescript": "5.3.3"
   }
 }

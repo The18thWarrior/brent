@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeSwitcherProvider } from "@/hooks/useThemeSwitcher";
 import Header from "./header";
@@ -11,6 +11,7 @@ import { createAppKit } from '@reown/appkit/react'
 import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 import { Suspense } from "react";
+import ContextProvider from "./context";
 
 // Set up queryClient
 const queryClient = new QueryClient()
@@ -40,13 +41,8 @@ const modal = createAppKit({
 })
 
 
-const geistSans = Geist({
+const geistSans = Inter({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -66,15 +62,13 @@ export default function RootLayout({
   const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable}`}>
         <Suspense>
-        <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
-          <QueryClientProvider client={queryClient}>
-          <Wrapper >
-            {children}
-          </Wrapper>
-          </QueryClientProvider>
-        </WagmiProvider>
+          <ContextProvider cookies={cookies}>
+            <Wrapper>
+              {children}
+            </Wrapper>
+          </ContextProvider>
         </Suspense>
       </body>
     </html>

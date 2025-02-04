@@ -1,8 +1,42 @@
 {
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "extends": "@brent/tsconfig/next.json",
-  "include": ["./"],
+  "include": [
+    "./",
+    ".next/types/**/*.ts"
+  ],
   "compilerOptions": {
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/service/*": [
+        "service/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/config/*": [
+        "config/*"
+      ],
+      "@/context/*": [
+        "context/*"
+      ],
+      "@/metadata/*": [
+        "metadata/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }
