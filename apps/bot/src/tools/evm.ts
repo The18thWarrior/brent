@@ -47,8 +47,8 @@ export const getERC20BalanceTool = createTool({
   },
 });
 
-const getTokenList = (chaindId: number, tolerance: 'low' | 'medium' | 'high') => {
-  if (chaindId !== 137) throw new Error("This tool only supports Polygon mainnet.");
+const getTokenList = (chaindId: string, tolerance: 'low' | 'medium' | 'high') => {
+  if (chaindId !== 'matic-mainnet') throw new Error("This tool only supports Polygon mainnet.");
   const tokenList = polygonTokens.tokens.filter((token) => {
     if (tolerance === 'low') {
       return token?.risk === 'low' && token?.category !== 'stablecoin';
@@ -66,7 +66,7 @@ export const getTokenListTool = createTool({
   id: "get-token-list",
   description: "This tool is used to get a list of tokens based on the specified tolerance level.",
   schema: z.object({
-      chainId: z.number().describe("The chain ID of the network to get the token list from."),
+      chainId: z.string().describe("The chain name of the network to get the token list from."),
       tolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level to filter the token list by."),
   }),
   execute: async (params) => {

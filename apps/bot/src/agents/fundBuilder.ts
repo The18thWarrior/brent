@@ -16,6 +16,7 @@ export default new Agent({
         name: "gpt-4o-mini",
     },
     description: "AI-driven investment advisor specializing in crypto mutual funds, providing risk tolerance assessments and token analysis with detailed insights into Web3 projects.",
+    instructions: ['Another agent takes that output and checks if there is liquidity for each of the selected tokens, pruning the list further. The output is formatted in our index fund schema and that is returned to the user.'],
     tools: {
         "get-erc20-balance": getERC20BalanceTool,
     },

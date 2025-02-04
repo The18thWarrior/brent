@@ -1,9 +1,10 @@
 import { ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
-import fundAgent from "../agents/fundBuilder";
+//import fundAgent from "../agents/fundBuilder";
+import walletResearcher from "../agents/walletResearcher";
 import tokenResearcher from "../agents/tokenResearcher";
 
 export default new ZeeWorkflow({
-    description: "A workflow that helps users understand their ERC20 token balances.",
-    output: "The goal of this workflow is to provide users with the balance of an ERC20 token.",
-    agents: { tokenResearcher, fundAgent },
+    description: "A workflow that helps users build a ERC20 index fund list on the Polygon chain using an analysis of the users wallet.",
+    output: "The goal of this workflow is to provide users with a validated list of tokens.",
+    agents: { walletResearcher, tokenResearcher },
   });
