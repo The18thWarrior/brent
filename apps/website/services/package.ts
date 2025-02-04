@@ -5,7 +5,7 @@ import { user, assistant } from "@covalenthq/ai-agent-sdk/dist/core/base";
 import {createIndexFundFlow} from "@brent/index-builder";
 import "dotenv/config";
 
-const runFlow = async (text: string) => {
+export const runFlow = async (text: string) => {
   const state = await StateFn.root(createIndexFundFlow.description);
     state.messages.push(
         user(
@@ -21,3 +21,4 @@ const runFlow = async (text: string) => {
       return "There was an error processing your request.";
     }
 }
+
