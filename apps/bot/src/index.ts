@@ -6,6 +6,7 @@ import {createIndexFundFlow} from "@brent/index-builder";
 import "dotenv/config";
 import TelegramBot from "node-telegram-bot-api";
 
+const apiKey = process.env.COVALENT_API_KEY as string;
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, {
     polling: true,
 });
@@ -26,14 +27,15 @@ bot.on("message", async (msg) => {
     };
 
     //const messages = [user(text)];
-    const state = await StateFn.root(createIndexFundFlow.description);
+    const _createIndexFundFlow = createIndexFundFlow(apiKey);
+    const state = await StateFn.root(_createIndexFundFlow.description);
     state.messages.push(
         user(
           text
         )
     );
     try {
-      const response = await ZeeWorkflow.run(createIndexFundFlow, state);
+      const response = await ZeeWorkflow.run(_createIndexFundFlow, state);
       console.log('initial response generated', response.messages, response.status);
       // if (response.type === "tool_call") {
       //   console.log('tool call');

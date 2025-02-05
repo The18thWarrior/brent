@@ -123,10 +123,10 @@ export const checkUniswapPoolTool = createTool({
       chainId: z.number().describe("The chain ID of the network to check the pool on."),
   }),
   execute: async (params) => {
-    if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
+    //if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
     if (!isAddress(params.sourceToken)) return "Invalid source token address.";
     if (!isAddress(params.targetToken)) return "Invalid target token address.";
-    const balance = await checkUniswapPool(params);
+    const balance = await checkUniswapPool({...params, chainId: 137});
     if (!balance.success) return balance.message;
     if (!balance.data) return "No pool found.";
     if (balance.data.liquidity === "0") return "Pool found but no liquidity.";

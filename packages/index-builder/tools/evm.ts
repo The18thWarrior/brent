@@ -48,7 +48,7 @@ export const getERC20BalanceTool = createTool({
 });
 
 const getTokenList = (chaindId: string, tolerance: 'low' | 'medium' | 'high') => {
-  if (chaindId !== 'matic-mainnet') throw new Error("This tool only supports Polygon mainnet.");
+  //if (chaindId !== 'matic-mainnet') throw new Error("This tool only supports Polygon mainnet.");
   const tokenList = polygonTokens.tokens.filter((token) => {
     if (tolerance === 'low') {
       return token?.risk === 'low' && token?.category !== 'stablecoin';
