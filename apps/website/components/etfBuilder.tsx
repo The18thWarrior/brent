@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlowDirect, runFlowFormat } from "@/services/package";
+import { runFlow, runFlowDirect, runFlowFormat } from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
@@ -52,6 +52,7 @@ const ETFBuilder: React.FC = () => {
         setStatus('draft');
       } else {
         result2.messages.map((message) => {if (typeof message.content === 'string') {try{console.log(JSON.parse(message.content))}catch(err){console.log(message.content)}}else{console.log(message.content)}});
+        const first = result2.messages.shift();
         setResponse(result2.messages);
         //setResponse([result.messages[result.messages.length - 1]]);
         setStatus('edit');   
