@@ -34,40 +34,51 @@ const ETFBuilder: React.FC = () => {
     // Add submit logic here
     //setSummary(summary);
 
+    executeAnalysis();
+  };
+  
+  const executeAnalysis = async () => {
     setLoading(true);
     setStatus('generating');
     setLoadingText("Evaluating your investing philosophy...");
-    const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
+    //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
+    const data = JSON.stringify(`Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier.`);
+    console.log(data);
+    const result = await runFlow(data);
     console.log(result);
     if (typeof result === 'string') {
       setError(result);
       setOpenSnackbar(true);
       setStatus('draft');
     } else {
-      const result2 = await runFlowFormat(JSON.stringify(result.messages));
-      console.log(result2);
-      if (typeof result2 === 'string') {
-        setError(result2);
-        setOpenSnackbar(true);
-        setStatus('draft');
-      } else {
-        result2.messages.map((message) => {if (typeof message.content === 'string') {try{console.log(JSON.parse(message.content))}catch(err){console.log(message.content)}}else{console.log(message.content)}});
-        const first = result2.messages.shift();
-        setResponse(result2.messages);
-        //setResponse([result.messages[result.messages.length - 1]]);
-        setStatus('edit');   
-      } 
+      //const result2 = await runFlowFormat(JSON.stringify(result.messages));
+      //console.log(result2);
+      result.messages.shift();
+      setResponse(result.messages);
+      //setResponse([result.messages[result.messages.length - 1]]);
+      setStatus('edit');   
+      // if (typeof result2 === 'string') {
+      //   setError(result2);
+      //   setOpenSnackbar(true);
+      //   setStatus('draft');
+      // } else {
+      //   //result2.messages.map((message) => {if (typeof message.content === 'string') {try{console.log(JSON.parse(message.content))}catch(err){console.log(message.content)}}else{console.log(message.content)}});
+      //   result2.messages.shift();
+      //   setResponse(result2.messages);
+      //   //setResponse([result.messages[result.messages.length - 1]]);
+      //   setStatus('edit');   
+      // } 
     }
     setLoading(false);
-  };
-  
+  }
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   }
 
   return (
     <Box width={'35vw'}>
-        {status === 'draft' && 
+        {status === 'draft' && false &&
           <form
             onSubmit={handleSubmit}
             style={{
@@ -103,6 +114,14 @@ const ETFBuilder: React.FC = () => {
             </button>
           </form>
         } 
+
+        {status === 'draft' &&
+          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+            <Button aria-label="refreh" onClick={executeAnalysis} variant={'contained'}>
+              Start Analysis
+            </Button>
+          </Stack>
+        }
         {status === 'generating' && 
           <Box textAlign="center">
             <h3>{loadingText}</h3>

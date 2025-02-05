@@ -21,45 +21,46 @@ const checkUniswapPool = async({
   fee, 
   chainId,
 }: CheckUniswapPoolParams) => {
-  const _sourceToken = JSON.parse(sourceToken) as Token;
-  const _targetToken = JSON.parse(targetToken) as Token;
-
-  const poolContractMap: Record<number, string> = {
-      1: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
-      137: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
-      8453: "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
-      43114: "0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD",
-      42161: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
-      56: "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7",
-      10: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
-  };
-
-  const nativeTokens: Record<number, string> = {
-      1: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-      137: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
-      8453: "0x4200000000000000000000000000000000000006",
-      43114: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
-      42161: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-      56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      10: "0x4200000000000000000000000000000000000006",
-  };
-
-  // Validate input
-  if (!sourceToken || !targetToken || !chainId || fee === 0) {
-      return { success: false, message: "Invalid input parameters.", data: null };
-  }
-
-  // Adjust if zero addresses
-  const sourceAddress =
-      _sourceToken.address === zeroAddress
-          ? nativeTokens[chainId]
-          : _sourceToken.address;
-  const targetAddress =
-      _targetToken.address === zeroAddress
-          ? nativeTokens[chainId]
-          : _targetToken.address;
-
   try {
+    const _sourceToken = JSON.parse(sourceToken) as Token;
+    const _targetToken = JSON.parse(targetToken) as Token;
+
+    const poolContractMap: Record<number, string> = {
+        1: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+        137: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+        8453: "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
+        43114: "0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD",
+        42161: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+        56: "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7",
+        10: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+    };
+
+    const nativeTokens: Record<number, string> = {
+        1: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        137: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        8453: "0x4200000000000000000000000000000000000006",
+        43114: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        42161: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        10: "0x4200000000000000000000000000000000000006",
+    };
+
+    // Validate input
+    if (!sourceToken || !targetToken || !chainId || fee === 0) {
+        return { success: false, message: "Invalid input parameters.", data: null };
+    }
+
+    // Adjust if zero addresses
+    const sourceAddress =
+        _sourceToken.address === zeroAddress
+            ? nativeTokens[chainId]
+            : _sourceToken.address;
+    const targetAddress =
+        _targetToken.address === zeroAddress
+            ? nativeTokens[chainId]
+            : _targetToken.address;
+
+  
       const poolAddress = computePoolAddress({
           factoryAddress: poolContractMap[chainId],
           tokenA: new UniswapToken(
@@ -123,10 +124,11 @@ export const checkUniswapPoolTool = createTool({
       chainId: z.number().describe("The chain ID of the network to check the pool on."),
   }),
   execute: async (params) => {
+    const {sourceToken, targetToken, fee, chainId} = params as {sourceToken:string, targetToken:string, fee:number, chainId:number};
     //if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
-    if (!isAddress(params.sourceToken)) return "Invalid source token address.";
-    if (!isAddress(params.targetToken)) return "Invalid target token address.";
-    const balance = await checkUniswapPool({...params, chainId: 137});
+    if (!isAddress(sourceToken)) return "Invalid source token address.";
+    if (!isAddress(targetToken)) return "Invalid target token address.";
+    const balance = await checkUniswapPool({sourceToken, targetToken, fee, chainId: 137});
     if (!balance.success) return balance.message;
     if (!balance.data) return "No pool found.";
     if (balance.data.liquidity === "0") return "Pool found but no liquidity.";
@@ -181,9 +183,10 @@ export const getTokenMetadataTool = createTool({
       chainId: z.number().describe("The chain ID of the network to check the token on."),
   }),
   execute: async (params) => {
-    if (params.chainId !== 137) return "This tool only supports Polygon mainnet.";
-    if (!isAddress(params.tokenAddress)) return "Invalid token address.";
-    const metadata = await getTokenMetadata(params);
+    const {tokenAddress, chainId} = params as {tokenAddress:string, chainId:number};
+    if (chainId !== 137) return "This tool only supports Polygon mainnet.";
+    if (!isAddress(tokenAddress)) return "Invalid token address.";
+    const metadata = await getTokenMetadata({tokenAddress, chainId});
     if (!metadata.success) return metadata.message;
     if (!metadata.data) return "No token metadata found.";
     return JSON.stringify(metadata.data);

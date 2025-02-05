@@ -1,7 +1,9 @@
 
-import { Agent, createTool, NFTBalancesTool, TokenBalancesTool, TransactionsTool, ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
+import { Agent, createTool, NFTBalancesTool, ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
 //import "dotenv/config";
 import { modelConfig } from "../services/config";
+import {TokenBalancesTool} from "../tools/customTokenBalance";
+import {TransactionsTool} from "../tools/customTransactionHistory";
 
 //const apiKey = process.env.COVALENT_API_KEY as string;
 
@@ -10,17 +12,17 @@ import { modelConfig } from "../services/config";
 export default (apiKey: string) => {
   const tools = {
     tokenBalances: new TokenBalancesTool(apiKey),
-    nftBalances: new NFTBalancesTool(apiKey),
-    transactions: new TransactionsTool(apiKey),
+    //nftBalances: new NFTBalancesTool(apiKey),
+    //transactions: new TransactionsTool(apiKey),
   };
   return new Agent({
     name: "wallet-researcher",
     model: modelConfig,
     instructions: [
-      "Analyze wallet activities using the provided blockchain tools",
-      "Summarize token holdings, NFT collections, and recent transactions",
-      "Provide insights about the wallet's activity patterns",
-      "Provide a summary of the wallet's overall activity along with a risk tolerance assessment. Risk tolerance can be low, medium, or high.",
+      "Use the provided wallet address to analyze the wallets activities using the provided blockchain tools",
+      //"Summarize token holdings, NFT collections, and recent transactions",
+      //"Provide insights about the wallet's activity patterns",
+      "Provide a risk tolerance assessment for the assessed data. Risk tolerance can be low, medium, or high.",
     ],
     description: "You are a blockchain researcher analyzing wallet activities on the matic-mainnet chain. You use this analysis to create lists of tokens that match the user's risk tolerance.",
     tools: tools,

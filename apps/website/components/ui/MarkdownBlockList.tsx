@@ -8,14 +8,14 @@ import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 // Customize this component with your own styling
 const MarkdownListComponent = ({ message }: {message: ChatCompletionMessageParam}) => {
-  const { isStreamFinished, output } = useStreamExample(message.content ? message.content?.toString(): '');
+  //const { isStreamFinished, output } = useStreamExample(message.content ? message.content?.toString(): '');
   const { blockMatches } = useLLMOutput({
-    llmOutput: output,
+    llmOutput: message.content ? message.content?.toString(): '',
     fallbackBlock: {
       component: MarkdownComponent, // from Step 1
       lookBack: markdownLookBack(),
     },
-    isStreamFinished,
+    isStreamFinished: true,
   });
   return (
     <div>

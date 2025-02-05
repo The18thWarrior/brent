@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@brent/index-builder": "workspace:*",
-    "@covalenthq/ai-agent-sdk": "^0.2.2",
+    "@covalenthq/ai-agent-sdk": "^0.2.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@llm-ui/code": "^0.13.3",

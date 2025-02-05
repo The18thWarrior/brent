@@ -38,11 +38,12 @@ export const getERC20BalanceTool = createTool({
       tokenAddress: z.string().describe("The token address to check the balance of."),
       chainId: z.number().describe("The chain ID of the network to check the balance on."),
   }),
-  execute: async (params) => {
-    if (params.chainId !== 137) throw new Error("This tool only supports Polygon mainnet.");
-    if (!isAddress(params.tokenAddress)) throw new Error("Invalid token address.");
-    if (!isAddress(params.walletAddress)) throw new Error("Invalid wallet address.");
-    const balance = await getERC20Balance(params.walletAddress, params.tokenAddress, process.env.SAFE_RPC_URL as string);
+  execute: async (params: unknown) => {
+    const { walletAddress, tokenAddress, chainId } = params as { walletAddress: string; tokenAddress: string; chainId: number };
+    if (chainId !== 137) throw new Error("This tool only supports Polygon mainnet.");
+    if (!isAddress(tokenAddress)) throw new Error("Invalid token address.");
+    if (!isAddress(walletAddress)) throw new Error("Invalid wallet address.");
+    const balance = await getERC20Balance(walletAddress, tokenAddress, process.env.SAFE_RPC_URL as string);
     return balance.toString();
   },
 });
@@ -70,6 +71,8 @@ export const getTokenListTool = createTool({
       tolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level to filter the token list by."),
   }),
   execute: async (params) => {
-    return getTokenList(params.chainId, params.tolerance);
+    const { tolerance, chainId } = params as { tolerance: 'low'|'medium'|'high'; chainId: string };
+    
+    return getTokenList(chainId, tolerance);
   },
 });

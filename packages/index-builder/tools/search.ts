@@ -34,8 +34,8 @@ export class WebSearchTool_Direct extends Tool {
    * @param params - An object conforming to the WebSearchSchema.
    * @returns A string summarizing the search results.
    */
-  private static async fetchData(params: z.infer<typeof WebSearchSchema>): Promise<string> {
-    const { query, limit } = params;
+  private static async fetchData(params: unknown): Promise<string> {
+    const { query, limit } = params as { query: string; limit: number};
     const encodedQuery = encodeURIComponent(query);
 
     // Build the DuckDuckGo API URL.
@@ -78,7 +78,7 @@ export const webSearchTool = createTool({
     "Perform a web search to retrieve public data about a specific subject using the DuckDuckGo API",
   schema: WebSearchSchema,
   async execute(params) {
-    const { query, limit } = params;
+    const { query, limit } = params as { query: string; limit: number};
     const encodedQuery = encodeURIComponent(query);
 
     // Build the DuckDuckGo API URL.
