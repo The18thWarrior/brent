@@ -7,20 +7,18 @@ import type { ChatCompletionMessageParam } from "openai/resources/chat/completio
 //import "dotenv/config";
 import TelegramBot from "node-telegram-bot-api";
 import { z } from "zod";
-import {getERC20BalanceTool} from "../tools/evm";
+import {formatFinalOutputTool} from "../tools/formatter";
 import { modelConfig } from "../services/config";
 
 export default new Agent({
     name: "message-evaluator",
     model: modelConfig,
-    description: "You are a .",
+    description: "You are an agent that evaluates a series of agent chat responses to summarize.",
     instructions: [
-      "For a given topic, search for the top 5 links.",
-      "Then read each URL and extract the article text, if a URL isn't available, ignore it.",
-      "Analyse and prepare an NYT worthy article based on the information.",
+      "Using the provided tools, evaluate the chat responses and use the embedded data to generate a structured output."
     ],
     tools: {
-        "get-erc20-balance": getERC20BalanceTool,
+        "format-output": formatFinalOutputTool,
     },
 });
 

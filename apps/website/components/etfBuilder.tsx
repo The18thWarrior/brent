@@ -1,7 +1,7 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlowDirect } from "@/services/package";
+import { runFlowDirect, runFlowFormat } from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
@@ -14,7 +14,8 @@ import { markdownLookBack } from "@llm-ui/markdown";
 import { useLLMOutput, useStreamExample } from "@llm-ui/react";
 import MarkdownComponent from "./ui/MarkdownBlock";
 import MarkdownListComponent from "./ui/MarkdownBlockList";
-
+import RefreshIcon from '@mui/icons-material/Refresh';
+import Refresh from "@mui/icons-material/Refresh";
 
 const ETFBuilder: React.FC = () => {
   const {address} = useAccount();
@@ -35,7 +36,7 @@ const ETFBuilder: React.FC = () => {
 
     setLoading(true);
     setStatus('generating');
-    setLoadingText("Submitting your investing philosophy...");
+    setLoadingText("Evaluating your investing philosophy...");
     const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
     console.log(result);
     if (typeof result === 'string') {
@@ -43,8 +44,18 @@ const ETFBuilder: React.FC = () => {
       setOpenSnackbar(true);
       setStatus('draft');
     } else {
-      setResponse(result.messages);
-      setStatus('edit');    
+      const result2 = await runFlowFormat(JSON.stringify(result.messages));
+      console.log(result2);
+      if (typeof result2 === 'string') {
+        setError(result2);
+        setOpenSnackbar(true);
+        setStatus('draft');
+      } else {
+        result2.messages.map((message) => {if (typeof message.content === 'string') {try{console.log(JSON.parse(message.content))}catch(err){console.log(message.content)}}else{console.log(message.content)}});
+        setResponse(result2.messages);
+        //setResponse([result.messages[result.messages.length - 1]]);
+        setStatus('edit');   
+      } 
     }
     setLoading(false);
   };
@@ -98,7 +109,12 @@ const ETFBuilder: React.FC = () => {
         }
         {status === 'edit' &&
           <Box>
-            <h3>Investing Philosophy Summary:</h3>
+            <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+              <Typography variant={'h5'}>Investing Philosophy Summary:</Typography>
+              <IconButton aria-label="refreh" onClick={() => {setStatus('draft');setSummary('');}}>
+                <Refresh />
+              </IconButton>
+            </Stack>
             <Box>
               {response.map((message, index) => {
                 return <MarkdownListComponent key={index} message={message} />;

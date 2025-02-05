@@ -2,7 +2,7 @@
 import { ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
 import { StateFn } from "@covalenthq/ai-agent-sdk/dist/core/state";
 import { user, assistant } from "@covalenthq/ai-agent-sdk/dist/core/base";
-import {createIndexFundFlow, createIndexFundDirectFlow} from "@brent/index-builder";
+import {createIndexFundFlow, createIndexFundDirectFlow, formatOutputFlow} from "@brent/index-builder";
 import "dotenv/config";
 
 const apiKey = process.env.COVALENT_API_KEY as string;
@@ -44,3 +44,20 @@ export const runFlowDirect = async (text: string) => {
     }
 }
 
+export const runFlowFormat = async (text: string) => {
+  const _formatOutputFlow = formatOutputFlow();
+  const state = await StateFn.root(_formatOutputFlow.description);
+    state.messages.push(
+        user(
+          text
+        )
+    );
+    try {
+      const response = await ZeeWorkflow.run(_formatOutputFlow, state);
+      console.log('initial response generated', response.status);
+      return response;
+    } catch (error) {
+      console.error("Error generating response:", error);
+      return "There was an error processing your request.";
+    }
+}
