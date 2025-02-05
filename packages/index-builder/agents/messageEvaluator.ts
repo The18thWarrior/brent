@@ -4,17 +4,15 @@ import {ZeeWorkflowState} from "@covalenthq/ai-agent-sdk/dist/core/state";
 import { user, assistant } from "@covalenthq/ai-agent-sdk/dist/core/base";
 import type { ParsedFunctionToolCall } from "openai/resources/beta/chat/completions";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import "dotenv/config";
+//import "dotenv/config";
 import TelegramBot from "node-telegram-bot-api";
 import { z } from "zod";
 import {getERC20BalanceTool} from "../tools/evm";
+import { modelConfig } from "../services/config";
 
 export default new Agent({
-    name: "Agent1",
-    model: {
-        provider: "OPEN_AI",
-        name: "gpt-4o-mini",
-    },
+    name: "message-evaluator",
+    model: modelConfig,
     description: "You are a .",
     instructions: [
       "For a given topic, search for the top 5 links.",

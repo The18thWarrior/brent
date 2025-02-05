@@ -1,21 +1,21 @@
 
 import { Agent, createTool, NFTBalancesTool, TokenBalancesTool, TransactionsTool, ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
-import "dotenv/config";
+//import "dotenv/config";
+import { modelConfig } from "../services/config";
 
-const apiKey = process.env.COVALENT_API_KEY;
+//const apiKey = process.env.COVALENT_API_KEY as string;
 
-const tools = {
-  tokenBalances: new TokenBalancesTool(apiKey),
-  nftBalances: new NFTBalancesTool(apiKey),
-  transactions: new TransactionsTool(apiKey),
-};
 
-export default new Agent({
-    name: "token-researcher",
-    model: {
-        provider: "OPEN_AI",
-        name: "gpt-4o-mini",
-    },
+
+export default (apiKey: string) => {
+  const tools = {
+    tokenBalances: new TokenBalancesTool(apiKey),
+    nftBalances: new NFTBalancesTool(apiKey),
+    transactions: new TransactionsTool(apiKey),
+  };
+  return new Agent({
+    name: "wallet-researcher",
+    model: modelConfig,
     instructions: [
       "Analyze wallet activities using the provided blockchain tools",
       "Summarize token holdings, NFT collections, and recent transactions",
@@ -24,4 +24,5 @@ export default new Agent({
     ],
     description: "You are a blockchain researcher analyzing wallet activities on the matic-mainnet chain. You use this analysis to create lists of tokens that match the user's risk tolerance.",
     tools: tools,
-});
+  })
+} ;
