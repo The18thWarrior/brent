@@ -6,7 +6,7 @@ import { ThemeSwitcherElement } from '../hooks/useThemeSwitcher';
 
 const Header = () => {
   return (
-    <AppBar position="sticky" color="primary" elevation={4}>
+    <AppBar position="fixed" color="primary" elevation={1} sx={{ zIndex: 10 }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Avatar alt="Brent" sx={{ width: 40, height: 40 }} >
           <FaBloggerB />

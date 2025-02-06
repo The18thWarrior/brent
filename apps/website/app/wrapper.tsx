@@ -19,7 +19,7 @@ export default function Wrapper({
       <ThemeSwitcherProvider>
         <CssBaseline enableColorScheme />
         <Stack direction={'column'} justifyContent={'space-between'} minHeight={'100dvh'}>
-          <Stack direction={'column'} justifyContent={'flex-start'}>
+          <Stack direction={'column'} justifyContent={'flex-start'} spacing={4}>
             <Header />
             <Stack direction={'column'} justifyContent={'start'}>
               <Stack spacing={2} direction="row" width={'full'} alignItems={'top'}>

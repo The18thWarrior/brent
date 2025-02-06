@@ -1,9 +1,10 @@
 import { Box, Button, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator } from "@/services/package";
+import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator, runFlowWallet, runFlowTokens} from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
+import { DNA } from 'react-loader-spinner'
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import {
   codeBlockLookBack,
@@ -16,6 +17,7 @@ import MarkdownComponent from "./ui/MarkdownBlock";
 import MarkdownListComponent from "./ui/MarkdownBlockList";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Refresh from "@mui/icons-material/Refresh";
+import LoadingComponent from "./loadingComponent";
 
 const ETFBuilder: React.FC = () => {
   const {address} = useAccount();
@@ -45,34 +47,40 @@ const ETFBuilder: React.FC = () => {
     setLoadingText("Evaluating your investing philosophy...");
     //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
     const data = JSON.stringify(`Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier.`);
-    console.log(data);
-    const result = await runFlow(data);
-    console.log(result);
-    if (typeof result === 'string') {
-      setError(result);
+    console.log('running wallet data');
+    const walletData = await runFlowWallet(data);
+    console.log(walletData);
+    if (typeof walletData === 'string') {
+      setError(walletData);
       setOpenSnackbar(true);
       setStatus('draft');
-    } else {
-      //const result2 = await runFlowFormat(JSON.stringify(result.messages));
-      //console.log(result2);
-      //result.messages.shift();
-      const result2 = await runOutputGenerator(result.messages);
-      setGeneratedData(JSON.stringify(result2));
-      setResponse(result.messages);
-      //setResponse([result.messages[result.messages.length - 1]]);
-      setStatus('edit');   
-      // if (typeof result2 === 'string') {
-      //   setError(result2);
-      //   setOpenSnackbar(true);
-      //   setStatus('draft');
-      // } else {
-      //   //result2.messages.map((message) => {if (typeof message.content === 'string') {try{console.log(JSON.parse(message.content))}catch(err){console.log(message.content)}}else{console.log(message.content)}});
-      //   result2.messages.shift();
-      //   setResponse(result2.messages);
-      //   //setResponse([result.messages[result.messages.length - 1]]);
-      //   setStatus('edit');   
-      // } 
+      setLoading(false);
+      return;
     }
+    console.log('running token data')
+
+    setLoadingText("Generating a token list for you...");
+    const tokenData = await runFlowTokens(JSON.stringify(walletData.messages));
+    console.log(tokenData);
+    if (typeof tokenData === 'string') {
+      setError(tokenData);
+      setOpenSnackbar(true);
+      setStatus('draft');
+      setLoading(false);
+      return;
+    }
+    //const result2 = await runFlowFormat(JSON.stringify(result.messages));
+    //console.log(result2);
+    //result.messages.shift();
+
+    setLoadingText("Validating the token list...");
+    console.log('running output generator');
+    const result2 = await runOutputGenerator(tokenData.messages);
+    setGeneratedData(JSON.stringify(result2));
+    setResponse(tokenData.messages);
+    //setResponse([result.messages[result.messages.length - 1]]);
+    setStatus('edit');   
+      
     setLoading(false);
   }
 
@@ -127,8 +135,17 @@ const ETFBuilder: React.FC = () => {
           </Stack>
         }
         {status === 'generating' && 
-          <Box textAlign="center">
-            <h3>{loadingText}</h3>
+          <Box >
+            <Typography variant={'h5'} textAlign={'center'} sx={{pb:2}}>{loadingText}</Typography>
+            {/* <DNA
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+            /> */}
+            <LoadingComponent />
           </Box>
         }
         {status === 'edit' &&

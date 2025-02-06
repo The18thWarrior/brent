@@ -3,7 +3,7 @@ import {polygon} from "viem/chains";
 import abi from "@openzeppelin/contracts/build/contracts/ERC20.json";
 import { createTool } from "@covalenthq/ai-agent-sdk";
 import { z } from "zod";
-import polygonTokens from '../data/polygon.json'
+import polygonTokens from '../data/polygon2.json';
 
 const getERC20Balance = async (
   walletAddress: string,
@@ -50,13 +50,13 @@ export const getERC20BalanceTool = createTool({
 
 const getTokenList = (chaindId: string, tolerance: 'low' | 'medium' | 'high') => {
   //if (chaindId !== 'matic-mainnet') throw new Error("This tool only supports Polygon mainnet.");
-  const tokenList = polygonTokens.tokens.filter((token) => {
+  const tokenList = polygonTokens.filter((token) => {
     if (tolerance === 'low') {
-      return token?.risk === 'low' && token?.category !== 'stablecoin';
+      return token?.risk === 'low' && token?.tags !== 'stablecoin';
     } else if (tolerance === 'medium') {
-      return (token?.risk === 'medium' || token?.risk === 'low') && token?.category !== 'stablecoin';
+      return (token?.risk === 'medium' || token?.risk === 'low') && token?.tags !== 'stablecoin';
     } else if (tolerance === 'high') {
-      return token?.category !== 'stablecoin';
+      return token?.tags !== 'stablecoin';
     }
     return false;
   });

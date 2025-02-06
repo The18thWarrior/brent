@@ -41,6 +41,7 @@ export const ThemeSwitcherProvider = ({ children }: { children: any }) => {
                   backgroundSize: '20px 20px',
                   pointerEvents: 'none',
                   zIndex: -1,
+                  backgroundRepeat: 'repeat',
                   backgroundImage: 'radial-gradient(rgba(37, 165, 137, 0.5) 1px, transparent 1px)' }
               },
             },

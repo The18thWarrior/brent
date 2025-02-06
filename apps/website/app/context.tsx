@@ -18,23 +18,23 @@ if (!projectId) {
 const metadata = {
   name: 'Brent',
   description: 'Crypto but faster',
-  url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
+  url: 'http://localhost:3000', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 
 // Create the modal
-const modal = createAppKit({
-  adapters: [wagmiAdapter],
-  projectId,
-  networks: [mainnet, polygon],
-  defaultNetwork: mainnet,
-  metadata: metadata,
-  features: {
-    analytics: true // Optional - defaults to your Cloud configuration
-  }
-})
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
+  const modal = createAppKit({
+    adapters: [wagmiAdapter],
+    projectId,
+    networks: [mainnet, polygon],
+    defaultNetwork: mainnet,
+    metadata: metadata,
+    features: {
+      analytics: true // Optional - defaults to your Cloud configuration
+    }
+  })
   const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
 
   return (

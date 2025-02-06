@@ -20,7 +20,7 @@ const tools = {
 
 export default new Agent({
     name: "token-researcher",
-    model: modelConfig,
+    model: {...modelConfig, temperature: 0.2},
     instructions: [
       "Using the tokensList tool, build a list of tokens that match the user's risk tolerance.",
       "Using the liquidityValidator tool, validate that token list against the available liquidity for each token given a source token.",

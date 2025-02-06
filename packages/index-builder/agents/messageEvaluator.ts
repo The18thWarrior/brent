@@ -12,7 +12,7 @@ import { modelConfig } from "../services/config";
 
 export default new Agent({
     name: "message-evaluator",
-    model: modelConfig,
+    model: {...modelConfig, temperature: 0.2},
     description: "You are an agent that evaluates a series of agent chat responses to summarize.",
     instructions: [
       "Using the provided tools, evaluate the chat responses and use the embedded data to generate a structured output."
