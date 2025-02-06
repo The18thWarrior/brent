@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlow, runFlowDirect, runFlowFormat } from "@/services/package";
+import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator } from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
@@ -26,6 +26,8 @@ const ETFBuilder: React.FC = () => {
   const [status, setStatus] = useState('draft' as 'draft' | 'generating' | 'edit' );
   const [loadingText, setLoadingText] = useState("");
   const [response, setResponse] = useState([] as ChatCompletionMessageParam[]);
+
+  const [generatedData, setGeneratedData] = useState("");
   const theme = useTheme();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +55,9 @@ const ETFBuilder: React.FC = () => {
     } else {
       //const result2 = await runFlowFormat(JSON.stringify(result.messages));
       //console.log(result2);
-      result.messages.shift();
+      //result.messages.shift();
+      const result2 = await runOutputGenerator(result.messages);
+      setGeneratedData(JSON.stringify(result2));
       setResponse(result.messages);
       //setResponse([result.messages[result.messages.length - 1]]);
       setStatus('edit');   
@@ -139,6 +143,9 @@ const ETFBuilder: React.FC = () => {
               {response.map((message, index) => {
                 return <MarkdownListComponent key={index} message={message} />;
               })}
+
+              <Typography variant={'h5'}>Generated Data:</Typography>
+              <Typography variant={'body1'}>{generatedData}</Typography>
             </Box>
           </Box>
         }

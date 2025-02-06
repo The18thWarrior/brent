@@ -20,8 +20,6 @@ export default (apiKey: string) => {
     model: modelConfig,
     instructions: [
       "Use the provided wallet address to analyze the wallets activities using the provided blockchain tools",
-      //"Summarize token holdings, NFT collections, and recent transactions",
-      //"Provide insights about the wallet's activity patterns",
       "Provide a risk tolerance assessment for the assessed data. Risk tolerance can be low, medium, or high.",
     ],
     description: "You are a blockchain researcher analyzing wallet activities on the matic-mainnet chain. You use this analysis to create lists of tokens that match the user's risk tolerance.",
