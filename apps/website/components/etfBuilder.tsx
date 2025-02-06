@@ -18,6 +18,9 @@ import MarkdownListComponent from "./ui/MarkdownBlockList";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Refresh from "@mui/icons-material/Refresh";
 import LoadingComponent from "./loadingComponent";
+import ResultsList from "./resultsList";
+import { SourceList } from "@/services/types";
+import OpaqueCard from "./ui/OpaqueCard";
 
 const ETFBuilder: React.FC = () => {
   const {address} = useAccount();
@@ -46,7 +49,7 @@ const ETFBuilder: React.FC = () => {
     setStatus('generating');
     setLoadingText("Evaluating your investing philosophy...");
     //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
-    const data = JSON.stringify(`Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier.`);
+    const data = `Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier on chain 'matic-mainnet'. Persist the wallet address and chain in the state.`;
     console.log('running wallet data');
     const walletData = await runFlowWallet(data);
     console.log(walletData);
@@ -76,6 +79,7 @@ const ETFBuilder: React.FC = () => {
     setLoadingText("Validating the token list...");
     console.log('running output generator');
     const result2 = await runOutputGenerator(tokenData.messages);
+    console.log(result2);
     setGeneratedData(JSON.stringify(result2));
     setResponse(tokenData.messages);
     //setResponse([result.messages[result.messages.length - 1]]);
@@ -127,6 +131,13 @@ const ETFBuilder: React.FC = () => {
           </form>
         } 
 
+        {status === 'edit' &&
+          <OpaqueCard sx={{mt:2}}>
+            <ResultsList source={null}/>
+          </OpaqueCard>
+        }
+
+
         {status === 'draft' &&
           <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
             <Button aria-label="refreh" onClick={executeAnalysis} variant={'contained'}>
@@ -148,7 +159,7 @@ const ETFBuilder: React.FC = () => {
             <LoadingComponent />
           </Box>
         }
-        {status === 'edit' &&
+        {status === 'edit' && false && 
           <Box>
             <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
               <Typography variant={'h5'}>Investing Philosophy Summary:</Typography>

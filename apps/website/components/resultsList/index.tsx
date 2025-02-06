@@ -23,7 +23,7 @@ const sourceTokens: Token[] = [
   }
 ];
 
-const ResultsList = ({source}: {source: SourceList}) => {
+const ResultsList = ({source}: {source: SourceList | null}) => {
   const [sourceToken, setSourceToken] = useState<Token>();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -35,12 +35,12 @@ const ResultsList = ({source}: {source: SourceList}) => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" >
-      <Stack direction={'row'} spacing={2} justifyContent={'center'} alignItems={'center'}>
+    <Box display="flex" >
+      <Stack direction={'row'} spacing={2} justifyContent={'center'} alignItems={'start'}>
         <ButtonBase aria-label="Change funding source." id="basic-button" onClick={handleClick} sx={{}}>
           <Stack direction={'row'} spacing={2} sx={{}}>
             {sourceToken && sourceToken.logo && <Avatar src={sourceToken.logo} sx={{ width: 24, height: 24 }} />}
-            <Typography color='text.primary'>{sourceToken ? sourceToken.name: 'None'}</Typography>
+            <Typography color='text.primary'>{sourceToken ? sourceToken.name: 'Select Source Token'}</Typography>
             <ArrowDropDownIcon />
           </Stack>
         </ButtonBase>
@@ -66,7 +66,7 @@ const ResultsList = ({source}: {source: SourceList}) => {
       </Menu>
 
       <Stack direction={'column'} spacing={2} justifyContent={'center'} alignItems={'center'}>
-        {source.tokens.map((token) => {
+        {source && source.tokens.map((token) => {
           return (
             <Stack key={token.address} direction={'row'} spacing={2} justifyContent={'center'} alignItems={'center'}>
               <Avatar src={token.logo} sx={{ width: 24, height: 24 }} />
