@@ -133,7 +133,7 @@ const ETFBuilder: React.FC = () => {
 
         {status === 'edit' &&
           <OpaqueCard sx={{mt:2}}>
-            <ResultsList source={null}/>
+            <ResultsList source={JSON.parse(generatedData)}/>
           </OpaqueCard>
         }
 

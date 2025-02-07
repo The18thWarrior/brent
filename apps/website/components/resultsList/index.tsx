@@ -1,8 +1,9 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Avatar, Box, Button, ButtonBase, Menu, MenuItem, Stack, Typography } from '@mui/material';
 import { SourceList, Token } from '@/services/types';
+import ResultItem from './resultItem';
 
 const sourceTokens: Token[] = [
   {
@@ -25,6 +26,7 @@ const sourceTokens: Token[] = [
 
 const ResultsList = ({source}: {source: SourceList | null}) => {
   const [sourceToken, setSourceToken] = useState<Token>();
+  const [feeList, setFeeList] = useState<{[key: string]: number}>({});
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,6 +36,16 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
     setAnchorEl(null);
   };
 
+  const handleFeeChange = (address: string, fee: number) => {{}
+    setFeeList(prev => ({ ...prev, [address]: fee }));
+  };
+
+  useEffect(() => {
+    console.log('sourceToken', sourceToken);
+  }, [sourceToken]);
+  useEffect(() => {
+    console.log('source', source);
+  }, [source]);
   return (
     <Box display="flex" >
       <Stack direction={'row'} spacing={2} justifyContent={'center'} alignItems={'start'}>
@@ -66,13 +78,10 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
       </Menu>
 
       <Stack direction={'column'} spacing={2} justifyContent={'center'} alignItems={'center'}>
-        {source && source.tokens.map((token) => {
+        {source && sourceToken && source.tokens.map((token, index) => {
           return (
-            <Stack key={token.address} direction={'row'} spacing={2} justifyContent={'center'} alignItems={'center'}>
-              <Avatar src={token.logo} sx={{ width: 24, height: 24 }} />
-              <Typography color='text.primary'>{token.name}</Typography>
-            </Stack>
-          );
+            <ResultItem key={index} token={token} sourceToken={sourceToken} setFee={handleFeeChange} />
+          )
         })}
       </Stack>
     </Box>
