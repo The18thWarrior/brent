@@ -47,8 +47,8 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
     console.log('source', source);
   }, [source]);
   return (
-    <Box display="flex" >
-      <Stack direction={'row'} spacing={2} justifyContent={'center'} alignItems={'start'}>
+    <Stack direction={'column'} spacing={2} >
+      <Stack direction={'row'} spacing={2} justifyContent={'start'} alignItems={'start'}>
         <ButtonBase aria-label="Change funding source." id="basic-button" onClick={handleClick} sx={{}}>
           <Stack direction={'row'} spacing={2} sx={{}}>
             {sourceToken && sourceToken.logo && <Avatar src={sourceToken.logo} sx={{ width: 24, height: 24 }} />}
@@ -84,7 +84,7 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
           )
         })}
       </Stack>
-    </Box>
+    </Stack>
   )
 };
 

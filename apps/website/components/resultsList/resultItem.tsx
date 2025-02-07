@@ -28,7 +28,6 @@ const ResultItem = ({token, sourceToken, setFee}: {token: Token, sourceToken: To
       }
     };
     if (sourceToken && token) fetchPools();
-    fetchPools();
   }, [token, sourceToken]);
 
   if (!hasPool) return null;

@@ -1,0 +1,30 @@
+{
+  "name": "@brent/data-enrichment",
+  "version": "0.2.0",
+  "type": "module",
+  "main": "coingeckoDataEnrichment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "enrich": "tsx ./coingeckoDataEnrichment.ts",
+    "build": "tsc"
+  },
+  "author": "JP",
+  "license": "MIT",
+  "description": "Scripts",
+  "devDependencies": {
+    "@brent/tsconfig": "workspace:*",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@brent/index-builder": "workspace:*",
+    "dotenv": "^16.4.7",
+    "typescript": "^5.7.3",
+    "axios": "^0.27.2"
+  }
+}

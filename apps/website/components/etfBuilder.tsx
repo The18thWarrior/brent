@@ -4,7 +4,6 @@ import StyledTextArea from "./ui/StyledTextArea";
 import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator, runFlowWallet, runFlowTokens} from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
-import { DNA } from 'react-loader-spinner'
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import {
   codeBlockLookBack,
@@ -131,14 +130,67 @@ const ETFBuilder: React.FC = () => {
           </form>
         } 
 
-        {status === 'edit' &&
+        {status === 'draft' &&
           <OpaqueCard sx={{mt:2}}>
-            <ResultsList source={JSON.parse(generatedData)}/>
+            <ResultsList source={{
+              walletAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              tolerance: 'medium',
+              tokens: [
+                {
+                  address: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+                  name: 'Uniswap',
+                  logo: 'https://assets.coingecko.com/coins/images/125/125.png',
+                  decimals: 18,
+                  risk: "medium",
+                  category: "dex"
+                },
+                {
+                  address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+                  name: 'WETH',
+                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+                  decimals: 18,
+                  risk: "low",
+                  category: "infrastructure"
+                },
+                {
+                  address: '0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3',
+                  name: 'BNB',
+                  logo: 'https://assets.coingecko.com/coins/images/279/small/bnb.png',
+                  decimals: 18,
+                  risk: "low",
+                  category: "infrastructure"
+                },
+                {
+                  address: '0xd93f7E271cB87c23AaA73edC008A79646d1F9912',
+                  name: 'WSOL',
+                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+                  decimals: 18,
+                  risk: "medium",
+                  category: "infrastructure"
+                },
+                {
+                  address: '0xb0897686c545045aFc77CF20eC7A532E3120E0F1',
+                  name: 'LINK',
+                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+                  decimals: 18,
+                  risk: "medium",
+                  category: "infrastructure"
+                },
+                {
+                  address: '0x6f8a06447Ff6FcF75d803135a7de15CE88C1d4ec',
+                  name: 'SHIB',
+                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+                  decimals: 18,
+                  risk: "high",
+                  category: "token"
+                }
+              ]
+            }}/>
           </OpaqueCard>
         }
 
 
-        {status === 'draft' &&
+        {status === 'edit' &&
           <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
             <Button aria-label="refreh" onClick={executeAnalysis} variant={'contained'}>
               Start Analysis
