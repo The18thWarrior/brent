@@ -5,6 +5,8 @@ export type Token = {
     logo?:string;
     name?:string;
     decimals: number;
+    description?: string;
+    fee?: number;
 }
 
 export type SourceList = {

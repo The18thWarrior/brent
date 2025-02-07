@@ -112,7 +112,7 @@
     "rank": null,
     "description": "utility",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -319,7 +319,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,Aave Tokens,Polygon Ecosystem"
   },
   {
@@ -387,7 +387,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Aave Tokens,Polygon Ecosystem"
   },
   {
@@ -1619,7 +1619,7 @@
     "rank": null,
     "description": "The Arch Aggressive Portfolio (AAGG) belongs to our family of portfolios and is aimed at capturing the long-term upside of Web3, while still providing diversification with yield-bearing tokens.\r\nAAGG portfolio is designed for long-term investors that prioritize potentially higher returns over risk or volatility. \r\nThe portfolio focus is on maximizing returns through higher exposure to growth-oriented assets in the Web3 space.\r\nWhat sets our portfolio construction apart is our innovative methodology, which includes subset resampling. This technique enhances the efficiency of the mean-variance optimization process, enabling us to identify the most efficient portfolios with the highest expected returns for a given level of risk. Our Arch Aggressive Portfolio is ideally rebalanced quarterly, allowing us to make adjustments based on market conditions or performance.\r\nThe AAGG portfolio is available to swap, mint, and redeem on the Polygon network.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "high",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -1827,7 +1827,7 @@
     "rank": null,
     "description": "Digital Cash by ARYZE are full-reserve stablecoins issued as eEUR, eGBP & eUSD. All variants of Digital Cash are backed one-to-one with government-issued assets.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,Polygon Ecosystem,Ethereum Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -2624,7 +2624,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Tokenized Assets,Avalanche Ecosystem,Polygon Ecosystem,Gnosis Chain Ecosystem,Arbitrum Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Tokenized Treasury Bonds (T-Bonds)"
   },
   {
@@ -2647,7 +2647,7 @@
     "rank": null,
     "description": "What is the project about?\r\nBacked brings real-world assets (RWAs) such as stocks or ETFs to blockchain rails. For example, our product bIBTA tracks the iShares $ Treasury Bond 1-3yr UCITS ETF, aiming to reflect an index of USD bonds by the US Treasury with 1-3yr maturities. \r\n\r\nWhat makes your project unique?\r\nBacked issues permissionless tokens (bTokens) that represent ownership of structured products. Backed tokens are 1:1 backed by the underlying assets, held by Swiss third-party custodians, and are bankruptcy remote book-entry securities.\r\n\r\nHistory of your project.\r\nBacked was incorporated in 2021 in Switzerland due to the regulatory clarity the Swiss DLT Act provided to the project. Backed released its first tokenized product on Ethereum in early Q1 2023. Backed now supports issuance and redemption on many different blockchains.\r\n\r\nWhat’s next for your project?\r\nBacked is working to create the standard for tokenization with a network of protocols benefitting from RWAs on-chain.\r\n\r\nWhat can your token be used for?\r\nBacked enables clients to access sustainable, low-risk yields while keeping their funds entirely on-chain. There is no need to go through TradFi onboarding processes or off-ramp crypto to fiat.\r\n\r\nbTokens are utilized by the likes of Gnosis, Angle Protocol, Ribbon Finance, Aragon, and Blueberry to name a few.\r\n\r\n\r\nDisclaimer:\r\nBacked Finance AG and its subsidiary Backed Assets GmbH are not affiliates of or licensed by BlackRock Inc, BlackRock Fund Advisors and any of its affiliates (\"BlackRock\"). BlackRock is not responsible in any way to bIB01 products.\r\n\r\n\r\nBacked DOES NOT sell its tokens to U.S. Persons or for the account or benefit of U.S. Persons, and tokens are not marketed, offered, or solicited in the U.S. or in any other prohibited jurisdiction.\r\n\r\nFor a full list of prohibited and restricted countries and review of legal documentation, please visit https://www.backedassets.fi/legal-documentation (edited) \r\n\r\n",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Tokenized Assets,BNB Chain Ecosystem,Avalanche Ecosystem,Polygon Ecosystem,Gnosis Chain Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Tokenized Treasury Bonds (T-Bonds)"
   },
   {
@@ -2739,7 +2739,7 @@
     "rank": null,
     "description": "Backed Swiss Domestic Government Bond 0-3 (bCSBGC3) is a tracker certificate issued as an ERC-20 token. bCSBGC3 tracks the price of iShares Swiss Domestic Government Bond 0-3 ETF. bCSBGC3 is designed to give eligible cryptocurrency market participants regulatory-compliant access to the stock price of  iShares Swiss Domestic Government Bond 0-3 ETF.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Arbitrum Ecosystem,Ethereum Ecosystem,Real World Assets (RWA)"
   },
   {
@@ -2785,7 +2785,7 @@
     "rank": null,
     "description": " The Backed ZPR1 $ 1-3 Month T-Bill (ticker symbol: bZPR1) is a tracker certificate issued as an ERC-20 token. bZPR1 tracks the price of the SPDR® Bloomberg 1-3 Month T-Bill UCITS ETF (acc).\r\n\r\nThis product is not licensed by or affiliated to Bloomberg, and it bears no responsibility to it.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Avalanche Ecosystem,Polygon Ecosystem,Gnosis Chain Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Base Ecosystem"
   },
   {
@@ -3203,7 +3203,7 @@
     "rank": 213,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,USD Stablecoin,BNB Chain Ecosystem,Avalanche Ecosystem,Polygon Ecosystem,Optimism Ecosystem,Fiat-backed Stablecoin,Binance-Peg Tokens"
   },
   {
@@ -3386,7 +3386,7 @@
     "rank": 7491,
     "description": "Privacy focused decentralized cryptocurrency providing truly anonymous untraceable transactions based on PoS consensus and zk-SNARKs data protection protocol (Zero Knowledge Proof)",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "high",
     "tags": "Smart Contract Platform,Privacy Coins,Masternodes,Governance,BNB Chain Ecosystem,Polygon Ecosystem,Meme,Arbitrum Ecosystem,Ethereum Ecosystem,Zero Knowledge (ZK),Telegram Apps,TON Ecosystem,Proof of Stake (PoS)"
   },
   {
@@ -3421,7 +3421,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -4092,7 +4092,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -5480,7 +5480,7 @@
     "rank": null,
     "description": "$Culo Token is a meme token designed with purpose. Its instant utility is an Ai Contract Scanner called CuloScanner primmed to heat up the POLYGON network",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "high",
     "tags": "Meme"
   },
   {
@@ -5633,7 +5633,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Energy,Polygon Ecosystem"
   },
   {
@@ -7135,7 +7135,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -7407,7 +7407,7 @@
     "rank": 3423,
     "description": "## What is EUROe?\r\n\r\nEUROe is a fully fiat-backed EU-regulated Euro stablecoin issued by Membrane Finance. Secured by at least 102% of euro-denominated assets, one EUROe is always redeemable for one fiat Euro by clients of Membrane Finance.\r\n\r\nEUROe is regulated as e-money, and Membrane Finance holds an EU-wide Electronic Money Institution licence issued by the Finnish Financial Supervisory Authority.\r\n\r\n\r\n## How Many EUROe Are There in Circulation?\r\n\r\nEUROe supply changes over time as new EUROe is issued or existing EUROe is redeemed by Membrane Finance’s clients. Currently, there are no fees for issuing or redeeming EUROe. Companies, foundations, and other corporate entities can apply to become a Membrane Finance client to access the minting and burning of EUROe.\r\n\r\n\r\n## Who Is the Founder of EUROe?\r\n\r\nThe company behind EUROe, Membrane Finance, was founded by Juha Viitala in 2021. EUROe is incubated by Equilibrium, a core blockchain infrastructure builder, and funded by Maki.vc, a seed-stage venture capital company.\r\n\r\n\r\n## Where Can I Buy EUROe?\r\n\r\nEUROe is available for trading on a growing number of decentralised exchanges and directly through Membrane Finance.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,EUR Stablecoin,Solana Ecosystem,Avalanche Ecosystem,Polygon Ecosystem,Arbitrum Ecosystem,Ethereum Ecosystem,Optimism Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -7427,7 +7427,7 @@
     "rank": 469,
     "description": "Spiko EU T-Bills Money Market Fund is a fully-licensed EUR money market fund operating under the EU regulatory framework. It only invests in Treasury Bills issued by the strongest Eurozone Member States with less than 6 months maturity and keeps its maximum average portfolio maturity under 2 months.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Tokenized Assets,Polygon Ecosystem,Arbitrum Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Starknet Ecosystem,Tokenized Treasury Bills (T-Bills)"
   },
   {
@@ -8996,7 +8996,7 @@
     "rank": null,
     "description": "Launched in November 2022, Gram Platinum Token (GRAMP) is an asset-backed token redeemable 1:1 for 1 gram of platinum. Issued by Token Teknoloji Anonim Şirketi, this token is fully backed by platinum on the blockchain at a 1:1 ratio and indexed to the price of platinum. For every GRAMP created, an equivalent amount of physical platinum is held as collateral in the company's reserves.\r\n\r\nGRAMP provides a cost-effective, fast and secure solution for global users, offering direct ownership with no storage costs and high accessibility for 24/7 transactions and transfers, regardless of geographical boundaries. Unlike platinum transaction limits in the market, there are no minimum transaction limits for GRAMP transactions.\r\n\r\nGRAMP transactions are executed instantly and any amount of GRAMP tokens can be converted to fiat currencies, ensuring quick and efficient transactions.\r\n\r\nGRAMP is created and runs on the Avalanche C-Chain and Polygon blockchain, and it is compatible with all blockchain wallets that support EVM. It uses smart contracts to automatically manage the collateralization process.\r\n\r\nAs the demand for GRAMP tokens increases, the Token Teknoloji Anonim Şirketi will add the equivalent amount of physical grams of platinum to its reserves for each GRAMP token upon the request of institutions wishing to meet their demand. This ensures that the 1:1 ratio between grams of platinum and GRAMP is maintained whilst keeping the market in balance between supply and demand.\r\n\r\nAnd a coin burn function is built into the blockchain's smart contract to remove a pre-determined amount of GRAMP tokens from circulation when needed, ensuring a balance between GRAMP and the gram of platinum. Thanks to this mint-and-burn mechanism, the price of GRAMP is always in equilibrium with the price of the physical gram of platinum.\r\n",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Crypto-Backed Tokens,Avalanche Ecosystem,Polygon Ecosystem"
   },
   {
@@ -9188,7 +9188,7 @@
     "rank": null,
     "description": "Launched on December 2, 2019 by Richard Heart and team, HEX is the first certificate of deposit on the blockchain, essentially time deposits that gain interest, HEX is an ERC20 Token that runs over the Ethereum network\r\n",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "high",
     "tags": "Cryptocurrency,Polygon Ecosystem,Harmony Ecosystem,Ethereum Ecosystem,Alleged SEC Securities"
   },
   {
@@ -9388,7 +9388,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -11033,7 +11033,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -11133,7 +11133,7 @@
     "rank": null,
     "description": "Launched in November 2022, LiraT (TRYT) is an asset-backed token redeemable 1:1 for 1 Turkish lira. Issued by Token Teknoloji Anonim Şirketi, this token is fully backed by Turkish lira on the blockchain at a 1:1 ratio and indexed to the price of Turkish lira. For every TRYT created, an equivalent amount of Turkish lira is held as collateral in the company's reserves.\r\n\r\nTRYT provides a cost-effective, fast and secure solution for global users, offering direct ownership with no storage costs and high accessibility for 24/7 transactions and transfers, regardless of geographical boundaries. Unlike fiat Turkish lira transaction limits in the market, there are no minimum transaction limits for TRYT.\r\n\r\nTRYT transactions are executed instantly and any amount of TRYT tokens can be converted to fiat currencies, ensuring quick and efficient transactions.\r\n\r\nTRYT is created and runs on the Avalanche C-Chain and Polygon blockchain, and it is compatible with all blockchain wallets that support EVM. It uses smart contracts to automatically manage the collateralization process.\r\n\r\nAs the demand for TRYT tokens increases, Token Teknoloji Anonim Şirketi will add the equivalent amount of Turkish lira to its reserves for each TRYT token upon request from institutions wishing to meet their demand. This ensures that the 1:1 ratio between Turkish lira and TRYT is maintained whilst keeping the market in balance between supply and demand.\r\n\r\nAnd a coin burn function is built into the blockchain's smart contract to remove a pre-determined amount of TRYT tokens from circulation when needed, ensuring a balance between TRYT and the Turkish lira. Thanks to this mint-and-burn mechanism, the price of TRYT is always in equilibrium with the price of the  Turkish lira.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,Avalanche Ecosystem,Polygon Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -11252,7 +11252,7 @@
     "rank": null,
     "description": "Losercoin (ticker symbol: $LOWB) is a project initiated by two poor guys from China, one is a father of two kids from a village, the other one is a coder living a miserable life by working 60 hours a week .\r\n\r\nTwo founders first heard about Bitcoin in 2017, and had lost a ton of money by trading cryptocurrencies. They started this project as an open journey and were fully prepared to lose everything.\r\n\r\nLosercoin was publicly launched on April 21, 2021 (No Initial Coin Offering), and two founders have added their whole life savings into the liquidity pool. It is guaranteed that the project team will not pump the price of $LOWB due to lack of capital, and no rug pull.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "high",
     "tags": "BNB Chain Ecosystem,Polygon Ecosystem"
   },
   {
@@ -11443,7 +11443,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,Polygon Ecosystem"
   },
   {
@@ -12469,7 +12469,7 @@
     "rank": null,
     "description": "Monerium is the first and, to date, only company authorized to issue money on blockchains under current European financial regulation and proposed Market in Crypto-Assets regulation. We have issued EUR, USD, GBP, and ISK as e-money tokens on Ethereum and EUR on Algorand. Monerium also operates a gateway for instant transfers of EUR between bank accounts and blockchain wallets / smart contracts. Founded by crypto OGs and repeat entrepreneurs, Monerium is backed by Taavet+Sten, Crowberry Capital, ConsenSys, Algorand, and several entrepreneurs and early crypto adopters. ",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,Decentralized Finance (DeFi),EUR Stablecoin,Polygon Ecosystem,Gnosis Chain Ecosystem,Arbitrum Ecosystem,Ethereum Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -14938,7 +14938,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem,Bridged USDT,Bridged-Tokens,Bridged Stablecoins"
   },
   {
@@ -15237,7 +15237,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -15254,7 +15254,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -16427,7 +16427,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -17162,7 +17162,7 @@
     "rank": 612,
     "description": "The Spiko US T-Bills Money Market Fund is a fully licensed USD money market fund operating under the EU regulatory framework. The fund exclusively invests in United States Treasury Bills with maturities of less than six months, maintaining an average portfolio maturity of no more than two months. Approved by the French Financial Markets Authority, the Spiko US T-Bills Money Market Fund is accessible to all types of investors, both professional and non-professional.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Tokenized Assets,Polygon Ecosystem,Arbitrum Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Starknet Ecosystem,Tokenized Treasury Bills (T-Bills)"
   },
   {
@@ -17179,7 +17179,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -17489,7 +17489,7 @@
     "rank": 403,
     "description": "EURS token is a virtual financial asset that is designed to digitally mirror the EURO on the condition that its value is tied to the value of its collateral.\r\n\r\nDownload STASIS Stablecoin wallet: Android: https://play.google.com/store/apps/details?id=com.stasis.stasiswallet iOS: https://itunes.apple.com/app/stasis-wallet/id1371949230",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Finance / Banking,Cryptocurrency,Stablecoins,EUR Stablecoin,Polygon Ecosystem,Ethereum Ecosystem,Real World Assets (RWA),Fiat-backed Stablecoin"
   },
   {
@@ -18587,7 +18587,7 @@
     "rank": null,
     "description": "Launched in September 2023, EURO Token (EUROT) is an asset-backed token redeemable 1:1 for 1 euro. Issued by Token Teknoloji Anonim Şirketi, this token is fully backed by euro on the blockchain at a 1:1 ratio and indexed to the price of EUR. For every EUROT created, an equivalent amount of EUR is held as collateral in the company's reserves.\r\n\r\nEUROT provides a cost-effective, fast and secure solution for global users, offering direct ownership with no storage costs and high accessibility for 24/7 transactions and transfers, regardless of geographical boundaries. Unlike fiat euro transaction limits in the market, there are no minimum transaction limits for EUROT.\r\n\r\nEUROT transactions are executed instantly and any amount of EUROT tokens can be converted to fiat currencies, ensuring quick and efficient transactions. \r\n\r\nEUROT is created and runs on the Avalanche C-Chain and Polygon blockchain, and it is compatible with all blockchain wallets that support EVM. It uses smart contracts to automatically manage the collateralization process.\r\n\r\nAs the demand for EUROT tokens increases, Token Teknoloji Anonim Şirketi will add the equivalent amount of euros to its reserves for each EUROT token upon request from institutions wishing to meet their demand. This ensures that the 1:1 ratio between euro and EUROT is maintained whilst keeping the market in balance between supply and demand.\r\n\r\nAnd a coin burn function is built into the blockchain's smart contract to remove a pre-determined amount of EUROT tokens from circulation when needed, ensuring a balance between EUROT and the euro. Thanks to this mint-and-burn mechanism, the price of EUROT is always in equilibrium with the price of the euro.\r\n",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,EUR Stablecoin,Avalanche Ecosystem,Polygon Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -18605,7 +18605,7 @@
     "rank": null,
     "description": "Launched in September 2023, USD Token (USDOT) is an asset-backed token redeemable 1:1 for 1 US dollar. Issued by Token Teknoloji Anonim Şirketi, this token is fully backed by US dollar on the blockchain at a 1:1 ratio and indexed to the price of USD. For every USDOT created, an equivalent amount of USD is held as collateral in the company's reserves.\r\n\r\nUSDOT provides a cost-effective, fast and secure solution for global users, offering direct ownership with no storage costs and high accessibility for 24/7 transactions and transfers, regardless of geographical boundaries. Unlike fiat US dollar transaction limits in the market, there are no minimum transaction limits for USDOT.\r\n\r\nUSDOT transactions are executed instantly and any amount of USDOT tokens can be converted to fiat currencies, ensuring quick and efficient transactions. \r\n\r\nUSDOT is created and runs on the Avalanche C-Chain and Polygon blockchain, and it is compatible with all blockchain wallets that support EVM. It uses smart contracts to automatically manage the collateralization process.\r\n\r\nAs the demand for USDOT tokens increases, Token Teknoloji Anonim Şirketi will add the equivalent amount of US dollars to its reserves for each USDOT token upon request from institutions wishing to meet their demand. This ensures that the 1:1 ratio between US dollar and USDOT is maintained whilst keeping the market in balance between supply and demand.\r\n\r\nAnd a coin burn function is built into the blockchain's smart contract to remove a pre-determined amount of USDOT tokens from circulation when needed, ensuring a balance between USDOT and the US dollar. Thanks to this mint-and-burn mechanism, the price of USDOT is always in equilibrium with the price of the US dollar.\r\n",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,USD Stablecoin,Avalanche Ecosystem,Polygon Ecosystem,Fiat-backed Stablecoin"
   },
   {
@@ -18809,7 +18809,7 @@
     "rank": null,
     "description": "",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Polygon Ecosystem"
   },
   {
@@ -19297,7 +19297,7 @@
     "rank": 7,
     "description": "USDC is a fully collateralized US dollar stablecoin. USDC is the bridge between dollars and trading on cryptocurrency exchanges. The technology behind CENTRE makes it possible to exchange value between people, businesses and financial institutions just like email between mail services and texts between SMS providers. We believe by removing artificial economic borders, we can create a more inclusive global economy.",
     "decimals": 18,
-    "risk": "medium",
+    "risk": "low",
     "tags": "Stablecoins,USD Stablecoin,Solana Ecosystem,Avalanche Ecosystem,Polygon Ecosystem,Near Protocol Ecosystem,Arbitrum Ecosystem,Celo Ecosystem,Ethereum Ecosystem,Algorand Ecosystem,Optimism Ecosystem,Aptos Ecosystem,ZkSync Ecosystem,Sui Ecosystem,Base Ecosystem,Tron Ecosystem,Hedera Ecosystem,Stellar Ecosystem,Fiat-backed Stablecoin,Made in USA"
   },
   {

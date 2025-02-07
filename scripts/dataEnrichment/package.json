@@ -5,7 +5,8 @@
   "main": "coingeckoDataEnrichment.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "enrich": "tsx ./coingeckoDataEnrichment.ts",
+    "enrich:gecko": "tsx ./coingeckoDataEnrichment.ts",
+    "enrich:llm": "tsx ./generateRiskCategory.ts",
     "build": "tsc"
   },
   "author": "JP",
@@ -25,6 +26,15 @@
     "@brent/index-builder": "workspace:*",
     "dotenv": "^16.4.7",
     "typescript": "^5.7.3",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "@covalenthq/ai-agent-sdk": "^0.2.5",
+    "@covalenthq/client-sdk": "^2.2.3",
+    "@openzeppelin/contracts": "^5.2.0",
+    "@uniswap/sdk-core": "^7.5.0",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-sdk": "^3.24.0",
+    "openai": "^4.83.0",
+    "viem": "^2.22.23",
+    "zod": "^3.24.1"
   }
 }

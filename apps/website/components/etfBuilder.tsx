@@ -91,6 +91,19 @@ const ETFBuilder: React.FC = () => {
     setOpenSnackbar(false);
   }
 
+  const handleRefresh = () => {
+    setStatus('draft');
+    setSummary('');
+  }
+
+  const RefreshButton = () => {
+    return (
+      <IconButton aria-label="refreh" onClick={handleRefresh}>
+        <Refresh />
+      </IconButton>
+    );
+  }
+
   return (
     <Box width={'35vw'}>
         {status === 'draft' && false &&
@@ -132,13 +145,14 @@ const ETFBuilder: React.FC = () => {
 
         {status === 'draft' &&
           <OpaqueCard sx={{mt:2}}>
-            <ResultsList source={{
+            <ResultsList refresh={handleRefresh} source={{
               walletAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
               tolerance: 'medium',
               tokens: [
                 {
                   address: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
                   name: 'Uniswap',
+                  description: 'Uniswap is a decentralized finance protocol that is used to exchange cryptocurrencies. It is also the name of the company that initially built the Uniswap protocol.',
                   logo: 'https://assets.coingecko.com/coins/images/125/125.png',
                   decimals: 18,
                   risk: "medium",
@@ -147,6 +161,7 @@ const ETFBuilder: React.FC = () => {
                 {
                   address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
                   name: 'WETH',
+                  description: 'Wrapped Ether (WETH) is a token that represents Ether and is compliant with the ERC20 standard.',
                   logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
                   decimals: 18,
                   risk: "low",
@@ -155,6 +170,7 @@ const ETFBuilder: React.FC = () => {
                 {
                   address: '0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3',
                   name: 'BNB',
+                  description: 'BNB is the native cryptocurrency of the Binance Smart Chain.',
                   logo: 'https://assets.coingecko.com/coins/images/279/small/bnb.png',
                   decimals: 18,
                   risk: "low",
@@ -163,6 +179,7 @@ const ETFBuilder: React.FC = () => {
                 {
                   address: '0xd93f7E271cB87c23AaA73edC008A79646d1F9912',
                   name: 'WSOL',
+                  description: 'Solana is a high-performance blockchain that can facilitate up to 65,000 transactions per second.',
                   logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
                   decimals: 18,
                   risk: "medium",
@@ -171,6 +188,7 @@ const ETFBuilder: React.FC = () => {
                 {
                   address: '0xb0897686c545045aFc77CF20eC7A532E3120E0F1',
                   name: 'LINK',
+                  description: 'Chainlink (LINK) is a decentralized oracle network that connects smart contracts with real-world data.',
                   logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
                   decimals: 18,
                   risk: "medium",
@@ -179,6 +197,7 @@ const ETFBuilder: React.FC = () => {
                 {
                   address: '0x6f8a06447Ff6FcF75d803135a7de15CE88C1d4ec',
                   name: 'SHIB',
+                  description: 'SHIB is a cryptocurrency token created as an experiment in decentralized community building.',
                   logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
                   decimals: 18,
                   risk: "high",
@@ -215,9 +234,7 @@ const ETFBuilder: React.FC = () => {
           <Box>
             <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
               <Typography variant={'h5'}>Investing Philosophy Summary:</Typography>
-              <IconButton aria-label="refreh" onClick={() => {setStatus('draft');setSummary('');}}>
-                <Refresh />
-              </IconButton>
+              <RefreshButton />
             </Stack>
             <Box>
               {response.map((message, index) => {

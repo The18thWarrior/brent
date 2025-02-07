@@ -1,0 +1,81 @@
+'use client'
+import LoadingButton from "@mui/lab/LoadingButton";
+import { Stack, ButtonBase, Avatar, Typography, Menu, MenuItem, TextField, Card, CardActions, CardContent, CardMedia, Collapse, Stepper, StepLabel, Step } from "@mui/material";
+import { useEffect, useState } from "react";
+import { formatUnits } from "viem";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useAccount } from "wagmi";
+import { Token } from "@/services/types";
+import { useConnectedFund } from "@/hooks/useConnectedFund";
+
+export const BuyButton = ({ sourceToken, tokenList, amount, fees } : { sourceToken: Token, tokenList: Token[], amount: bigint, fees: {[key: string]: number} }) => {
+  const { isConnected, address, chainId, chain } = useAccount();
+  const { balance, allowance, hash, error, loading, isNativeToken, confirmationHash, approveContract, initiateSpot, status } = useConnectedFund({ sourceToken, fees, portfolio: tokenList });
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentAction, setCurrentAction] = useState('');
+  const isReadyToApprove = amount > BigInt(0);
+  const isReadyToBuy = isReadyToApprove && ((allowance && BigInt(allowance) >= BigInt(amount)) || (isNativeToken && BigInt(balance as bigint) >= BigInt(amount)));
+  const step = isReadyToBuy ? 1 : 0;
+
+  useEffect(() => { setIsLoading(false) }, []);
+
+  const handleApproval = () => {
+    approveContract(amount);
+  }  
+
+  const handleSpot = () => {
+    console.log('spotting');
+    initiateSpot(amount);
+  }
+
+  const executeCombinedFlow = async () => {
+    setIsLoading(true)
+    try {
+      if (!isReadyToBuy) {
+        await handleApproval();
+        setCurrentAction('approve');
+      } else {
+        await handleSpot();
+        setCurrentAction('spot');
+      }
+    } catch (error) { }
+
+  };
+
+  useEffect(() => {
+    /*if (!loading && status === 'success') {
+      if (currentAction === 'approve' && isReadyToBuy) {
+        handleSpot();
+        setCurrentAction('spot');
+      } else {
+        setCurrentAction('');
+        setIsLoading(false);
+      }
+    } else*/ if (!loading && status === 'error') {
+      setCurrentAction('');
+      setIsLoading(false);
+    } else if (!loading && status === 'idle') {
+      setCurrentAction('');
+      setIsLoading(false);
+    }
+
+  }, [loading, status]);
+
+  useEffect(() => {
+    if (confirmationHash.length > 0) {
+      if (currentAction === 'approve' && isReadyToBuy) {
+        setCurrentAction('spot');
+      } else {
+        setCurrentAction('');
+        setIsLoading(false);
+      }
+    }
+  }, [confirmationHash]);
+
+  if (!sourceToken) return null;
+  return (
+    <LoadingButton variant="contained" fullWidth disabled={!isReadyToApprove} onClick={executeCombinedFlow} loading={isLoading} loadingIndicator={"Executing..."}>
+      {isReadyToBuy ? "Buy" : "Approve & Buy"}
+    </LoadingButton>
+  )
+};

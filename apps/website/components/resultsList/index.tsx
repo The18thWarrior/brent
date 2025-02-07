@@ -1,14 +1,18 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Avatar, Box, Button, ButtonBase, Menu, MenuItem, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, ButtonBase, IconButton, Menu, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { SourceList, Token } from '@/services/types';
 import ResultItem from './resultItem';
+import { Refresh } from '@mui/icons-material';
+import { BuyButton } from '../buyButton';
+import { parseUnits } from 'viem';
 
 const sourceTokens: Token[] = [
   {
     name: "USDT",
     address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+    description: "Tether USD (USDT) is a stablecoin pegged to the US Dollar.",
     decimals: 6,
     logo: "https://xucre-public.s3.sa-east-1.amazonaws.com/tether.png",
     category: 'stablecoin',
@@ -17,6 +21,7 @@ const sourceTokens: Token[] = [
   {
     name: "USDC",
     address: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+    description: "USD Coin (USDC) is a stablecoin backed by US dollars.",
     decimals: 6,
     logo: "https://xucre-public.s3.sa-east-1.amazonaws.com/usdc.png",
     category: 'stablecoin',
@@ -24,8 +29,9 @@ const sourceTokens: Token[] = [
   }
 ];
 
-const ResultsList = ({source}: {source: SourceList | null}) => {
+const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () => void}) => {
   const [sourceToken, setSourceToken] = useState<Token>();
+  const [amount, setAmount] = useState<number>(0);
   const [feeList, setFeeList] = useState<{[key: string]: number}>({});
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -40,15 +46,18 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
     setFeeList(prev => ({ ...prev, [address]: fee }));
   };
 
-  useEffect(() => {
-    console.log('sourceToken', sourceToken);
-  }, [sourceToken]);
-  useEffect(() => {
-    console.log('source', source);
-  }, [source]);
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      setAmount(Number(event.target.value));
+    } catch (error) {
+      console.error("Invalid input: ", event.target.value);
+    }
+  }
+
+
   return (
     <Stack direction={'column'} spacing={2} >
-      <Stack direction={'row'} spacing={2} justifyContent={'start'} alignItems={'start'}>
+      <Stack direction={'row'} spacing={2} justifyContent={'space-between'} alignItems={'center'}>
         <ButtonBase aria-label="Change funding source." id="basic-button" onClick={handleClick} sx={{}}>
           <Stack direction={'row'} spacing={2} sx={{}}>
             {sourceToken && sourceToken.logo && <Avatar src={sourceToken.logo} sx={{ width: 24, height: 24 }} />}
@@ -56,6 +65,9 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
             <ArrowDropDownIcon />
           </Stack>
         </ButtonBase>
+        <IconButton aria-label="refreh" onClick={refresh}>
+          <Refresh />
+        </IconButton>
       </Stack>
       <Menu
         id="basic-menu"
@@ -83,6 +95,12 @@ const ResultsList = ({source}: {source: SourceList | null}) => {
             <ResultItem key={index} token={token} sourceToken={sourceToken} setFee={handleFeeChange} />
           )
         })}
+      </Stack>
+      <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
+        <TextField id="amount" label="Amount"type={'number'} value={amount} onChange={handleAmountChange} />
+        {sourceToken && Object.keys(feeList).length > 0 && source && 
+          <BuyButton sourceToken={sourceToken} tokenList={source.tokens} amount={parseUnits(amount.toString(), sourceToken.decimals)} fees={feeList} />
+        }
       </Stack>
     </Stack>
   )
