@@ -77,7 +77,16 @@ export const getTokenListTool = createTool({
     
     const tokenList = getTokenList(chainId, tolerance);
     console.log('total length', tokenList.length);
-    const randomItems = getRandomItems(tokenList, 50);
+    
+    const randomItems = getRandomItems(tokenList, 100).map((token) => ({
+      id: token.id,
+      address: token.address,
+      name: token.name,
+      symbol: token.symbol,
+      risk: token.risk,
+      category: token.tags,
+      description: token.description.length > 150 ? token.description.slice(0, 147) + '...' : token.description,
+    }));
     console.log('random items length', randomItems.length, randomItems[randomItems.length - 1]);
     return JSON.stringify(randomItems);
   },

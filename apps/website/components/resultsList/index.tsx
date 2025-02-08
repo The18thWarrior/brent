@@ -11,6 +11,7 @@ import { polygonCoins, baseCoins } from '@brent/index-builder';
 
 const sourceTokens: Token[] = [
   {
+    id: 'polygon-bridged-usdt-polygon',
     name: "USDT",
     address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
     description: "Tether USD (USDT) is a stablecoin pegged to the US Dollar.",
@@ -20,6 +21,7 @@ const sourceTokens: Token[] = [
     risk: 'low',
   },
   {
+    id: 'usd-coin',
     name: "USDC",
     address: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
     description: "USD Coin (USDC) is a stablecoin backed by US dollars.",
@@ -56,6 +58,11 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
   }
 
   const coins = polygonCoins.reduce((acc, coin) => {
+    acc[coin.id] = {...coin, category: coin.tags};
+    return acc;
+  }, {} as {[key: string]: Token});
+
+  const coinsByAddress = polygonCoins.reduce((acc, coin) => {
     acc[coin.address] = {...coin, category: coin.tags};
     return acc;
   }, {} as {[key: string]: Token});
@@ -99,7 +106,7 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
       <Stack direction={'column'} spacing={2} justifyContent={'center'} alignItems={'center'}>
         {source && sourceToken && source.tokens.map((token, index) => {
           return (
-            <ResultItem key={index} token={token} metadataMap={coins} sourceToken={sourceToken} setFee={handleFeeChange} />
+            <ResultItem key={index} token={token} metadataMap={coins} metadataByAddress={coinsByAddress} sourceToken={sourceToken} setFee={handleFeeChange} />
           )
         })}
       </Stack>

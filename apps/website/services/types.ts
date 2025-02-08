@@ -7,6 +7,7 @@ export type Token = {
     decimals: number;
     description?: string;
     fee?: number;
+    id?: string;
 }
 
 export type SourceList = {

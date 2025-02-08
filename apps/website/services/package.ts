@@ -128,6 +128,7 @@ export const runTokenOutputGenerator = async (messages: ChatCompletionMessagePar
           tolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level of the user from the analysis of the output."),
           tokens: z.array(z.object({
             address: z.string().describe("The address of the token."),
+            id: z.string().describe("The id of the token."),
             // decimals: z.number().describe("The number of decimals the token has."),
             // risk: z.enum(['low', 'medium', 'high']).describe("The risk level of the token."),
             // category: z.enum(['stablecoin', 'utility', 'defi', 'nft', 'gaming', 'metaverse', 'oracle', 'dex', 'lending', 'other']).describe("The category of the token."),

@@ -21,9 +21,8 @@ export default (apiKey: string) => {
     instructions: [
       "Use the provided wallet address to analyze the wallets activities using the provided blockchain tools",
       "Provide a risk tolerance assessment for the assessed data. Risk tolerance can be low, medium, or high.",
-      "When you have an error fetching data, return the thread to the user."
     ],
-    description: "You are a blockchain researcher analyzing wallet activities on the matic-mainnet chain. You use this analysis to create lists of tokens that match the user's risk tolerance.",
+    description: "You are a blockchain researcher analyzing wallet activities on the matic-mainnet chain.",
     tools: tools,
   })
 } ;
