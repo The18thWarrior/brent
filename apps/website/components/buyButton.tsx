@@ -1,21 +1,15 @@
 'use client'
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Stack, ButtonBase, Avatar, Typography, Menu, MenuItem, TextField, Card, CardActions, CardContent, CardMedia, Collapse, Stepper, StepLabel, Step } from "@mui/material";
 import { useEffect, useState } from "react";
-import { formatUnits } from "viem";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useAccount } from "wagmi";
 import { Token } from "@/services/types";
 import { useConnectedFund } from "@/hooks/useConnectedFund";
 
 export const BuyButton = ({ sourceToken, tokenList, amount, fees } : { sourceToken: Token, tokenList: Token[], amount: bigint, fees: {[key: string]: number} }) => {
-  const { isConnected, address, chainId, chain } = useAccount();
-  const { balance, allowance, hash, error, loading, isNativeToken, confirmationHash, approveContract, initiateSpot, status } = useConnectedFund({ sourceToken, fees, portfolio: tokenList });
+  const { balance, allowance, loading, isNativeToken, confirmationHash, approveContract, initiateSpot, status } = useConnectedFund({ sourceToken, fees, portfolio: tokenList });
   const [isLoading, setIsLoading] = useState(false);
   const [currentAction, setCurrentAction] = useState('');
   const isReadyToApprove = amount > BigInt(0);
   const isReadyToBuy = isReadyToApprove && ((allowance && BigInt(allowance) >= BigInt(amount)) || (isNativeToken && BigInt(balance as bigint) >= BigInt(amount)));
-  const step = isReadyToBuy ? 1 : 0;
 
   useEffect(() => { setIsLoading(false) }, []);
 
@@ -70,7 +64,7 @@ export const BuyButton = ({ sourceToken, tokenList, amount, fees } : { sourceTok
         setIsLoading(false);
       }
     }
-  }, [confirmationHash]);
+  }, [confirmationHash, isReadyToBuy]);
 
   if (!sourceToken) return null;
   return (

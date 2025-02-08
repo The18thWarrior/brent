@@ -2,7 +2,7 @@
 /// <reference path="../global.d.ts" />
 
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Avatar, Stack } from '@mui/material';
+import { AppBar, Toolbar, Avatar, Stack } from '@mui/material';
 import { FaBloggerB } from "react-icons/fa";
 
 import { ThemeSwitcherElement } from '../hooks/useThemeSwitcher';

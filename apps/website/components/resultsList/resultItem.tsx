@@ -1,10 +1,9 @@
 'use client'
 import React, { useEffect } from 'react';
-import { Avatar, Box, Button, IconButton, Stack, Tooltip, Typography } from '@mui/material';
-import { SourceList, Token, Token2 } from '@/services/types';
+import { Avatar, Box, IconButton, Stack, Tooltip, Typography } from '@mui/material';
+import { Token, Token2 } from '@/services/types';
 import { queryPools } from '@/services/poolChecker';
-import { formatEther, formatGwei } from 'viem'
-import { useAccount } from 'wagmi';
+import { formatGwei } from 'viem'
 import { Delete } from '@mui/icons-material';
 import './resultItem.css';
 

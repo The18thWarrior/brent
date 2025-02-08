@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeSwitcherProvider } from "@/hooks/useThemeSwitcher";
-import Header from "./header";
 import Wrapper from "./wrapper";
 import React, { ReactNode } from 'react';
 import { wagmiAdapter, projectId } from '@/config'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
 import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
-import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 import { Suspense } from "react";
 import { headers } from 'next/headers' // added
 import ContextProvider from "./context";

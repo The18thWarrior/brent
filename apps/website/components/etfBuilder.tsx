@@ -1,24 +1,13 @@
 'use client'
 
-import { Box, Button, IconButton, Stack, Typography, useTheme, Tab } from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme, Tab } from "@mui/material";
 import {TabContext, TabList, TabPanel} from '@mui/lab';
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlow, runFlowDirect, runFlowFormat, runFlowWallet, runFlowTokens, runWalletOutputGenerator, runTokenOutputGenerator} from "@/services/package";
+import { runFlowWallet, runFlowTokens, runWalletOutputGenerator, runTokenOutputGenerator} from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import {
-  codeBlockLookBack,
-  findCompleteCodeBlock,
-  findPartialCodeBlock,
-} from "@llm-ui/code";
-import { markdownLookBack } from "@llm-ui/markdown";
-import { useLLMOutput, useStreamExample } from "@llm-ui/react";
-import MarkdownComponent from "./ui/MarkdownBlock";
-import MarkdownListComponent from "./ui/MarkdownBlockList";
-import RefreshIcon from '@mui/icons-material/Refresh';
-import Refresh from "@mui/icons-material/Refresh";
 import LoadingComponent from "./loadingComponent";
 import ResultsList from "./resultsList";
 import { SourceList } from "@/services/types";
@@ -126,14 +115,6 @@ const ETFBuilder: React.FC = () => {
     setTokenConversationResponse([]);
     setGeneratedData('');
     setTabValue('loading');
-  }
-
-  const RefreshButton = () => {
-    return (
-      <IconButton aria-label="refreh" onClick={handleRefresh}>
-        <Refresh />
-      </IconButton>
-    );
   }
 
   return (

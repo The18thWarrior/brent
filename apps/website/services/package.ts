@@ -1,7 +1,7 @@
 'use server'
 import { ZeeWorkflow } from "@covalenthq/ai-agent-sdk";
 import { StateFn } from "@covalenthq/ai-agent-sdk/dist/core/state";
-import { user, assistant } from "@covalenthq/ai-agent-sdk/dist/core/base";
+import { user } from "@covalenthq/ai-agent-sdk/dist/core/base";
 import {createIndexFundFlow, createIndexFundDirectFlow, walletResearcherFlow, tokenResearcherFlow, formatOutputFlow, outputGeneratorAgent} from "@brent/index-builder";
 import "dotenv/config";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";

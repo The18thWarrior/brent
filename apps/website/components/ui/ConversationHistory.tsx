@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MarkdownListComponent from "./MarkdownBlockList";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import OpaqueCard from "./OpaqueCard";

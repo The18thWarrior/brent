@@ -1,9 +1,7 @@
 'use client'
 
 import { markdownLookBack } from "@llm-ui/markdown";
-import { useLLMOutput, useStreamExample } from "@llm-ui/react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { useLLMOutput } from "@llm-ui/react";
 import MarkdownComponent from "./MarkdownBlock";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { Paper, Stack, Typography } from "@mui/material";

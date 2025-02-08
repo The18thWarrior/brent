@@ -1,11 +1,10 @@
 import { computePoolAddress } from '@uniswap/v3-sdk'
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import { Token as UniswapToken } from '@uniswap/sdk-core';
-import truncateEthAddress from 'truncate-eth-address'
 import { FeeAmount } from '@uniswap/v3-sdk';
 import { readContract } from 'wagmi/actions';
 import { PoolData, Token2 } from './types';
-import { zeroAddress, getAddress, isAddress, createPublicClient, http } from "viem";
+import { getAddress } from "viem";
 import { config } from '@/config';
 
 

@@ -1,13 +1,13 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Avatar, Box, Button, ButtonBase, Divider, IconButton, Menu, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { Avatar, ButtonBase, Divider, IconButton, Menu, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { SourceList, Token } from '@/services/types';
 import ResultItem from './resultItem';
 import { Refresh } from '@mui/icons-material';
 import { BuyButton } from '../buyButton';
 import { parseUnits } from 'viem';
-import { polygonCoins, baseCoins } from '@brent/index-builder';
+import { polygonCoins } from '@brent/index-builder';
 
 const sourceTokens: Token[] = [
   {

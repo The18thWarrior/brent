@@ -4,7 +4,7 @@ import React, { Suspense } from 'react';
 // import './loadingComponent.css'
 // import { CowGame } from '@cowprotocol/cow-runner-game'
 import { DNA } from 'react-loader-spinner'
-import { Box, Button, CircularProgress, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 
 const LoadingComponent = () => (
   <Box display="flex" justifyContent="center" alignItems="center" >
