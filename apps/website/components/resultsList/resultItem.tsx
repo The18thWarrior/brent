@@ -22,13 +22,18 @@ const ResultItem = ({token, sourceToken, metadataMap, setFee}: {token: Token, so
     setHasNoPool();
     setFee(token.address, 0);
   }
+
+  const sourceMetadata = metadataMap[sourceToken.address];
+  const tokenMetadata = metadataMap[token.address];
+
   useEffect(() => {
     const fetchPools = async () => {
       const poolData = await queryPools({
-        sourceToken: {...sourceToken, chainId: 137, symbol: sourceToken.name} as Token2,
-        targetToken: {...token, chainId: 137, symbol: token.name} as Token2,
+        sourceToken: {...sourceMetadata, chainId: 137, symbol: sourceMetadata?.name} as Token2,
+        targetToken: {...tokenMetadata, chainId: 137, symbol: tokenMetadata?.name} as Token2,
         chainId: 137,
       });
+      console.log('poolData', poolData);
       if (poolData) {
         const _liquidity = BigInt(poolData.liquidity);
         if (_liquidity === BigInt(0)) {

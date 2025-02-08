@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 // import Tetris from 'react-tetris'
 // import './loadingComponent.css'
 // import { CowGame } from '@cowprotocol/cow-runner-game'
+import { DNA } from 'react-loader-spinner'
 import { Box, Button, CircularProgress, Stack } from '@mui/material';
 
 const LoadingComponent = () => (
@@ -58,8 +59,17 @@ const LoadingComponent = () => (
         )}
       </Tetris> */}
       {/* <CowGame /> */}
-      
-      <CircularProgress />
+      <DNA
+        visible={true}
+        height="180"
+        width="180"
+        ariaLabel="dna-loading"
+        wrapperStyle={{
+          transform: 'rotate(90deg)',
+        }}
+        wrapperClass="dna-wrapper"
+      />
+      {/* <CircularProgress /> */}
     </Suspense>
   </Box>
 );

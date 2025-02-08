@@ -102,16 +102,35 @@ export const runFlowFormat = async (text: string) => {
     }
 }
 
-export const runOutputGenerator = async (messages: ChatCompletionMessageParam[]) => {
+export const runWalletOutputGenerator = async (messages: ChatCompletionMessageParam[]) => {
   try {
     const schema = { data : z.object({
-          walletAddress: z.string().describe("The wallet address the analysis was done on."),
+          riskTolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level of the user from the analysis of the output."),
+          philosophySummary: z.string().describe("The investing philosophy of the wallet."),
+      })
+    };
+    const response = await outputGeneratorAgent.generate(messages, schema);
+    //const response = await ZeeWorkflow.run(outputGeneratorAgent, await StateFn.root(outputGeneratorAgent.description));
+    if (response.type === 'tool_call') throw new Error('Tool call not supported');
+    console.log('initial response generated', response.type);
+    return response.value;
+  } catch (error) {
+    console.error("Error generating response:", error);
+    return "There was an error processing your request.";
+  }
+}
+
+
+export const runTokenOutputGenerator = async (messages: ChatCompletionMessageParam[]) => {
+  try {
+    const schema = { data : z.object({
+          // walletAddress: z.string().describe("The wallet address the analysis was done on."),
           tolerance: z.enum(['low', 'medium', 'high']).describe("The tolerance level of the user from the analysis of the output."),
           tokens: z.array(z.object({
             address: z.string().describe("The address of the token."),
-            decimals: z.number().describe("The number of decimals the token has."),
-            risk: z.enum(['low', 'medium', 'high']).describe("The risk level of the token."),
-            category: z.enum(['stablecoin', 'utility', 'defi', 'nft', 'gaming', 'metaverse', 'oracle', 'dex', 'lending', 'other']).describe("The category of the token."),
+            // decimals: z.number().describe("The number of decimals the token has."),
+            // risk: z.enum(['low', 'medium', 'high']).describe("The risk level of the token."),
+            // category: z.enum(['stablecoin', 'utility', 'defi', 'nft', 'gaming', 'metaverse', 'oracle', 'dex', 'lending', 'other']).describe("The category of the token."),
           })).describe("The list of tokens that match the user's risk tolerance."),
       })
     };

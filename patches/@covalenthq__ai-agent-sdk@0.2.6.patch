@@ -1,0 +1,13 @@
+diff --git a/dist/core/state/index.js b/dist/core/state/index.js
+index 1802613c9c061a47996ba6fc795f83682d6f1269..b90b485fb82736c7f4fbb892747ba2bb3298820f 100644
+--- a/dist/core/state/index.js
++++ b/dist/core/state/index.js
+@@ -38,7 +38,7 @@ exports.StateFn = {
+             return {
+                 ...state,
+                 status: "finished",
+-                messages: [state.messages[0], agentResponse],
++                messages: [...state.messages, agentResponse],
+             };
+         }
+         throw new Error("No messages found in state");

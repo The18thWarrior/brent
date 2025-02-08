@@ -76,7 +76,9 @@ export const getTokenListTool = createTool({
     const { tolerance, chainId } = params as { tolerance: 'low'|'medium'|'high'; chainId: string };
     
     const tokenList = getTokenList(chainId, tolerance);
-    console.log(tokenList.length);
-    return JSON.stringify(getRandomItems(tokenList, 50));
+    console.log('total length', tokenList.length);
+    const randomItems = getRandomItems(tokenList, 50);
+    console.log('random items length', randomItems.length, randomItems[randomItems.length - 1]);
+    return JSON.stringify(randomItems);
   },
 });

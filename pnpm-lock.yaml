@@ -4,13 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@covalenthq/ai-agent-sdk@0.2.6':
+    hash: 74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd
+    path: patches/@covalenthq__ai-agent-sdk@0.2.6.patch
+
 importers:
 
   .:
     dependencies:
       '@covalenthq/ai-agent-sdk':
         specifier: ^0.2.6
-        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        version: 0.2.6(patch_hash=74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -107,7 +112,7 @@ importers:
         version: link:../../packages/index-builder
       '@covalenthq/ai-agent-sdk':
         specifier: ^0.2.6
-        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        version: 0.2.6(patch_hash=74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -177,7 +182,7 @@ importers:
         version: link:../../packages/index-builder
       '@covalenthq/ai-agent-sdk':
         specifier: ^0.2.6
-        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        version: 0.2.6(patch_hash=74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@cowprotocol/cow-runner-game':
         specifier: ^0.2.9
         version: 0.2.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -303,7 +308,7 @@ importers:
     dependencies:
       '@covalenthq/ai-agent-sdk':
         specifier: ^0.2.6
-        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        version: 0.2.6(patch_hash=74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -6774,7 +6779,7 @@ snapshots:
       - encoding
       - ws
 
-  '@covalenthq/ai-agent-sdk@0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
+  '@covalenthq/ai-agent-sdk@0.2.6(patch_hash=74b8244630bcb33adfab8a00b6e66de9a9790257ea9b7f7a381f776e17392dcd)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
       '@covalenthq/client-sdk': 2.2.3
       commander: 13.1.0

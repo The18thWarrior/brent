@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MarkdownComponent from "./MarkdownBlock";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
+import { Paper, Stack, Typography } from "@mui/material";
 
 
 // Customize this component with your own styling
@@ -20,12 +21,13 @@ const MarkdownListComponent = ({ message }: {message: ChatCompletionMessageParam
     isStreamFinished: true,
   });
   return (
-    <div>
+    <Stack spacing={0} direction="column" my={2} p={2} ml={message.role === 'user' ? 4 : 0} mr={message.role !== 'user' ? 4 : 0} component={Paper} textAlign={message.role === 'user' ? 'right' : 'left'} elevation={message.role === 'user' ? 4 : 0 }>
       {blockMatches.map((blockMatch, index) => {
         const Component = blockMatch.block.component;
         return <Component key={index} blockMatch={blockMatch} />;
       })}
-    </div>
+      <Typography variant="subtitle2" textAlign={message.role === 'user' ? 'right' : 'left'} color={'textSecondary'}>{message.role}</Typography>
+    </Stack>
   )
 };
 

@@ -6,8 +6,8 @@ import tokenResearcher from "../agents/tokenResearcher";
 export default (apiKey: string) => { 
   const _walletResearcher = walletResearcher(apiKey);
   return new ZeeWorkflow({
-    description: "A workflow that helps users build a list of ERC20 tokens on the Polygon chain using an analysis of the users wallet. Persist the wallet address, chain, and data retrieved from tools in the state. Important: Always use the token addresses exactly as provided by the function call. Do not generate, modify, or add any token addresses that are not returned by the verified function output.",
-    output: "The goal of this workflow is to provide users with a validated list of tokens.",
+    description: "A workflow that helps users analyze and research their wallets to categorize their risk profile.",
+    output: "The goal of this workflow is to provide users with an analysis of their wallet history.",
     agents: { _walletResearcher },
     maxIterations: 20
   });

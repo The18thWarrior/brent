@@ -105,7 +105,7 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
       </Stack>
       <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
         {sourceToken && Object.keys(feeList).length > 0 && source && 
-          <TextField id="amount" label="Amount"type={'number'} value={amount} onChange={handleAmountChange} />
+          <TextField id="amount" fullWidth label="Amount"type={'number'} value={amount} onChange={handleAmountChange} />
         }
         {sourceToken && Object.keys(feeList).length > 0 && source && 
           <BuyButton sourceToken={sourceToken}  tokenList={source.tokens} amount={parseUnits(amount.toString(), sourceToken.decimals)} fees={feeList} />

@@ -15,17 +15,18 @@ import { modelConfig } from "../services/config";
 const tools = {
   tokensList: getTokenListTool,
   //webSearch: webSearchTool,
-  liquidityValidator: checkUniswapPoolTool
+  //liquidityValidator: checkUniswapPoolTool
 };
 
 export default new Agent({
     name: "token-researcher",
     model: {...modelConfig, temperature: 0.2},
     instructions: [
-      "Using the tokensList tool, build a list of tokens that match the user's risk tolerance.",
-      "Using the liquidityValidator tool, validate that token list against the available liquidity for each token given a source token.",
-      // "Prune the list of tokens to provide a well-balanced mix of tokens. The list should contain no more than 15 tokens.",
-      // "Return the validated list of tokens to the user.",
+      "Using the tokensList tool, build a list of tokens that match the user's risk tolerance, which should be in the initial input.",
+      //"Using the liquidityValidator tool, validate that token list against the available liquidity for each token given a source token.",
+      "Prune the list of tokens to provide a well-balanced mix of tokens.",
+      "Important: Always use the token addresses exactly as provided by the function call. Do not generate, modify, or add any token addresses that are not returned by the verified function output.",
+      "Return the validated list of tokens to the user.",
     ],
     description: "You are an investment advisor that creates lists of tokens on the matic-mainnet chain that adheres to a specified investment philosophy and risk tolerance.",
     tools: tools,

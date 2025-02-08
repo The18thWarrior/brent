@@ -4,7 +4,7 @@ import { Box, Button, IconButton, Stack, Typography, useTheme, Tab } from "@mui/
 import {TabContext, TabList, TabPanel} from '@mui/lab';
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator, runFlowWallet, runFlowTokens} from "@/services/package";
+import { runFlow, runFlowDirect, runFlowFormat, runFlowWallet, runFlowTokens, runWalletOutputGenerator, runTokenOutputGenerator} from "@/services/package";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
@@ -72,8 +72,17 @@ const ETFBuilder: React.FC = () => {
     setWalletConversationResponse(walletData.messages);
     console.log('running token data')
 
+    const walletSummary = await runWalletOutputGenerator(walletData.messages);
+    console.log('Wallet Summary:', walletSummary);
+    if (typeof walletSummary === 'string') {
+      setError(walletSummary);
+      setOpenSnackbar(true);
+      setStatus('draft');
+      setLoading(false);
+      return;
+    }
     setLoadingText("Generating a token list for you...");
-    const tokenData = await runFlowTokens(JSON.stringify(walletData.messages));
+    const tokenData = await runFlowTokens(JSON.stringify(walletSummary));
     console.log(tokenData);
     if (typeof tokenData === 'string') {
       setError(tokenData);
@@ -83,15 +92,21 @@ const ETFBuilder: React.FC = () => {
       return;
     }
     setTokenConversationResponse(tokenData.messages);
-    //const result2 = await runFlowFormat(JSON.stringify(result.messages));
-    //console.log(result2);
-    //result.messages.shift();
 
     setLoadingText("Validating the token list...");
     console.log('running output generator');
-    const result2 = await runOutputGenerator(tokenData.messages);
-    console.log(result2);
-    setGeneratedData(JSON.stringify(result2));
+    const generatedData = await runTokenOutputGenerator(tokenData.messages);
+    console.log('generated data',generatedData);
+
+    if (typeof generatedData === 'string') {
+      setError(generatedData);
+      setOpenSnackbar(true);
+      setStatus('draft');
+      setLoading(false);
+      return;
+    }
+
+    setGeneratedData(JSON.stringify(generatedData));
     setTabValue('results');
     
     //setResponse([result.messages[result.messages.length - 1]]);
@@ -172,7 +187,7 @@ const ETFBuilder: React.FC = () => {
              <TabContext value={tabValue}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  {generatedData.length === 0 && <Tab label="Game" value="loading" />}
+                  {generatedData.length === 0 && <Tab label="Loading" value="loading" />}
                   {generatedData.length > 0 && <Tab label="Results" value="results" />}
                   <Tab label="Wallet Agent" value="walletHistory" />
                   <Tab label="Token Agent" value="tokenHistory" />
@@ -186,8 +201,8 @@ const ETFBuilder: React.FC = () => {
                   </Box>
                 </TabPanel>
               }
-              <TabPanel value="walletHistory"><ConversationHistory conversation={walletConversationResponse} /></TabPanel>
-              <TabPanel value="tokenHistory"><ConversationHistory conversation={tokenConversationResponse} /></TabPanel>
+              <TabPanel value="walletHistory"><OpaqueCard sx={{p:2, border: '1px solid grey'}} ><ConversationHistory conversation={walletConversationResponse} /></OpaqueCard></TabPanel>
+              <TabPanel value="tokenHistory"><OpaqueCard sx={{p:2, border: '1px solid grey'}} ><ConversationHistory conversation={tokenConversationResponse} /></OpaqueCard></TabPanel>
               <TabPanel value="results">
                 <Box>
                   {generatedData.length > 0 && <ResultsList refresh={handleRefresh} source={JSON.parse(generatedData) as SourceList}/>}
