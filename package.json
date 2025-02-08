@@ -18,6 +18,7 @@
     "dev:bot": "turbo run dev --filter=@brent/bot... --parallel",
     "dev:website": "turbo run dev --filter=@shop/website... --parallel",
     "deploy": "turbo run deploy",
+    "start": "turbo run deploy --parallel",
     "deploy:affected": "turbo run deploy --filter=${BASE_COMMIT:-...[origin/main]}",
     "deps:check": "npx npm-check-updates --deep",
     "deps:update": "pnpm deps:check -u && pnpm install"
