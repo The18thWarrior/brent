@@ -4,7 +4,6 @@ import "./globals.css";
 import Wrapper from "./wrapper";
 import React from 'react';
 import { wagmiAdapter, projectId } from '@/config'
-import { QueryClient } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
 import { mainnet, arbitrum, avalanche, base, optimism, polygon } from '@reown/appkit/networks'
 import { Suspense } from "react";
