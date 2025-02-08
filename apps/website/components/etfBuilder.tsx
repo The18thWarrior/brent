@@ -1,4 +1,7 @@
-import { Box, Button, IconButton, Stack, Typography, useTheme } from "@mui/material";
+'use client'
+
+import { Box, Button, IconButton, Stack, Typography, useTheme, Tab } from "@mui/material";
+import {TabContext, TabList, TabPanel} from '@mui/lab';
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
 import { runFlow, runFlowDirect, runFlowFormat, runOutputGenerator, runFlowWallet, runFlowTokens} from "@/services/package";
@@ -20,8 +23,10 @@ import LoadingComponent from "./loadingComponent";
 import ResultsList from "./resultsList";
 import { SourceList } from "@/services/types";
 import OpaqueCard from "./ui/OpaqueCard";
+import ConversationHistory from "./ui/ConversationHistory";
 
 const ETFBuilder: React.FC = () => {
+  const [tabValue, setTabValue] = React.useState('loading' as 'loading' | 'results' | 'walletHistory' | 'tokenHistory');
   const {address} = useAccount();
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [summary, setSummary] = useState("");
@@ -29,10 +34,15 @@ const ETFBuilder: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('draft' as 'draft' | 'generating' | 'edit' );
   const [loadingText, setLoadingText] = useState("");
-  const [response, setResponse] = useState([] as ChatCompletionMessageParam[]);
+  const [walletConversationResponse, setWalletConversationResponse] = useState([] as ChatCompletionMessageParam[]);
+  const [tokenConversationResponse, setTokenConversationResponse] = useState([] as ChatCompletionMessageParam[]);
 
   const [generatedData, setGeneratedData] = useState("");
   const theme = useTheme();
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue as 'loading' | 'results' | 'walletHistory' | 'tokenHistory');
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,6 +69,7 @@ const ETFBuilder: React.FC = () => {
       setLoading(false);
       return;
     }
+    setWalletConversationResponse(walletData.messages);
     console.log('running token data')
 
     setLoadingText("Generating a token list for you...");
@@ -71,6 +82,7 @@ const ETFBuilder: React.FC = () => {
       setLoading(false);
       return;
     }
+    setTokenConversationResponse(tokenData.messages);
     //const result2 = await runFlowFormat(JSON.stringify(result.messages));
     //console.log(result2);
     //result.messages.shift();
@@ -80,7 +92,7 @@ const ETFBuilder: React.FC = () => {
     const result2 = await runOutputGenerator(tokenData.messages);
     console.log(result2);
     setGeneratedData(JSON.stringify(result2));
-    setResponse(tokenData.messages);
+    
     //setResponse([result.messages[result.messages.length - 1]]);
     setStatus('edit');   
       
@@ -144,107 +156,43 @@ const ETFBuilder: React.FC = () => {
         } 
 
         {status === 'draft' &&
-          <OpaqueCard sx={{mt:2}}>
-            <ResultsList refresh={handleRefresh} source={{
-              walletAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-              tolerance: 'medium',
-              tokens: [
-                {
-                  address: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-                  name: 'Uniswap',
-                  description: 'Uniswap is a decentralized finance protocol that is used to exchange cryptocurrencies. It is also the name of the company that initially built the Uniswap protocol.',
-                  logo: 'https://assets.coingecko.com/coins/images/125/125.png',
-                  decimals: 18,
-                  risk: "medium",
-                  category: "dex"
-                },
-                {
-                  address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
-                  name: 'WETH',
-                  description: 'Wrapped Ether (WETH) is a token that represents Ether and is compliant with the ERC20 standard.',
-                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
-                  decimals: 18,
-                  risk: "low",
-                  category: "infrastructure"
-                },
-                {
-                  address: '0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3',
-                  name: 'BNB',
-                  description: 'BNB is the native cryptocurrency of the Binance Smart Chain.',
-                  logo: 'https://assets.coingecko.com/coins/images/279/small/bnb.png',
-                  decimals: 18,
-                  risk: "low",
-                  category: "infrastructure"
-                },
-                {
-                  address: '0xd93f7E271cB87c23AaA73edC008A79646d1F9912',
-                  name: 'WSOL',
-                  description: 'Solana is a high-performance blockchain that can facilitate up to 65,000 transactions per second.',
-                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
-                  decimals: 18,
-                  risk: "medium",
-                  category: "infrastructure"
-                },
-                {
-                  address: '0xb0897686c545045aFc77CF20eC7A532E3120E0F1',
-                  name: 'LINK',
-                  description: 'Chainlink (LINK) is a decentralized oracle network that connects smart contracts with real-world data.',
-                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
-                  decimals: 18,
-                  risk: "medium",
-                  category: "infrastructure"
-                },
-                {
-                  address: '0x6f8a06447Ff6FcF75d803135a7de15CE88C1d4ec',
-                  name: 'SHIB',
-                  description: 'SHIB is a cryptocurrency token created as an experiment in decentralized community building.',
-                  logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
-                  decimals: 18,
-                  risk: "high",
-                  category: "token"
-                }
-              ]
-            }}/>
-          </OpaqueCard>
-        }
-
-
-        {status === 'edit' &&
           <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
             <Button aria-label="refreh" onClick={executeAnalysis} variant={'contained'}>
               Start Analysis
             </Button>
           </Stack>
         }
-        {status === 'generating' && 
-          <Box >
-            <Typography variant={'h5'} textAlign={'center'} sx={{pb:2}}>{loadingText}</Typography>
-            {/* <DNA
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-            /> */}
-            <LoadingComponent />
-          </Box>
-        }
-        {status === 'edit' && false && 
-          <Box>
-            <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-              <Typography variant={'h5'}>Investing Philosophy Summary:</Typography>
-              <RefreshButton />
-            </Stack>
-            <Box>
-              {response.map((message, index) => {
-                return <MarkdownListComponent key={index} message={message} />;
-              })}
-
-              <Typography variant={'h5'}>Generated Data:</Typography>
-              <Typography variant={'body1'}>{generatedData}</Typography>
-            </Box>
-          </Box>
+        {status !== 'draft' && 
+          <OpaqueCard sx={{mt:2}} >
+             <TabContext value={tabValue}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <TabList onChange={handleChange} aria-label="lab API tabs example">
+                  <Tab label="Game" value="loading" />
+                  <Tab label="Wallet Agent" value="walletHistory" />
+                  <Tab label="Token Agent" value="tokenHistory" />
+                  {generatedData.length > 0 && <Tab label="Results" value="results" />}
+                </TabList>
+              </Box>
+              <TabPanel value="loading">
+                <Box>
+                  <Typography variant={'h5'} textAlign={'center'} sx={{pb:2}}>{loadingText}</Typography>
+                  <LoadingComponent />
+                </Box>
+              </TabPanel>
+              <TabPanel value="walletHistory"><ConversationHistory conversation={walletConversationResponse} /></TabPanel>
+              <TabPanel value="tokenHistory"><ConversationHistory conversation={tokenConversationResponse} /></TabPanel>
+              <TabPanel value="results">
+                <Box>
+                  <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                    <Typography variant={'h5'}>Investing Philosophy Summary</Typography>
+                    <RefreshButton />
+                  </Stack>
+                  {generatedData.length > 0 && <ResultsList refresh={handleRefresh} source={JSON.parse(generatedData) as SourceList}/>}
+                </Box>
+              </TabPanel>
+            </TabContext>
+            
+          </OpaqueCard>
         }
 
         <Snackbar

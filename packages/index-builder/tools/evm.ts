@@ -5,6 +5,7 @@ import { createTool } from "@covalenthq/ai-agent-sdk";
 import { z } from "zod";
 import polygonTokens from '../data/polygon.json';
 import baseTokens from '../data/base.json';
+import { getRandomItems } from "../services/helper";
 
 const getERC20Balance = async (
   walletAddress: string,
@@ -61,7 +62,7 @@ const getTokenList = (chaindId: string, tolerance: 'low' | 'medium' | 'high') =>
     }
     return false;
   });
-  return JSON.stringify(tokenList);
+  return tokenList;
 }
 
 export const getTokenListTool = createTool({
@@ -74,6 +75,7 @@ export const getTokenListTool = createTool({
   execute: async (params) => {
     const { tolerance, chainId } = params as { tolerance: 'low'|'medium'|'high'; chainId: string };
     
-    return getTokenList(chainId, tolerance);
+    const tokenList = getTokenList(chainId, tolerance);
+    return JSON.stringify(getRandomItems(tokenList, 100));
   },
 });

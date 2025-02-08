@@ -1,3 +1,5 @@
+'use client'
+
 import { markdownLookBack } from "@llm-ui/markdown";
 import { useLLMOutput, useStreamExample } from "@llm-ui/react";
 import ReactMarkdown from "react-markdown";

@@ -178,6 +178,9 @@ importers:
       '@covalenthq/ai-agent-sdk':
         specifier: ^0.2.5
         version: 0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+      '@cowprotocol/cow-runner-game':
+        specifier: ^0.2.9
+        version: 0.2.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.0.8)(react@19.0.0)
@@ -606,6 +609,12 @@ packages:
 
   '@covalenthq/client-sdk@2.2.3':
     resolution: {integrity: sha512-FwvlYpx5+Cr2f2aNNtfE8VYRn5Fr8I8SdY1Oq37tm5NSam0am8r1+zeC0Y2LVs9N/2vKJHoeOA+ivwf/uE6XSQ==}
+
+  '@cowprotocol/cow-runner-game@0.2.9':
+    resolution: {integrity: sha512-rX7HnoV+HYEEkBaqVUsAkGGo0oBrExi+d6Io+8nQZYwZk+IYLmS9jdcIObsLviM2h4YX8+iin6NuKl35AaiHmg==}
+    peerDependencies:
+      react: ^16.X
+      react-dom: ^16.X
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -6765,6 +6774,11 @@ snapshots:
   '@covalenthq/client-sdk@2.2.3':
     dependencies:
       big.js: 6.2.2
+
+  '@cowprotocol/cow-runner-game@0.2.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
