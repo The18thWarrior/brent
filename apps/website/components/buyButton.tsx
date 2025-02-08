@@ -32,7 +32,7 @@ export const BuyButton = ({ sourceToken, tokenList, amount, fees } : { sourceTok
         await handleSpot();
         setCurrentAction('spot');
       }
-    } catch (error) { }
+    } catch (error) {console.error(error)}
 
   };
 
@@ -64,7 +64,7 @@ export const BuyButton = ({ sourceToken, tokenList, amount, fees } : { sourceTok
         setIsLoading(false);
       }
     }
-  }, [confirmationHash, isReadyToBuy]);
+  }, [confirmationHash, isReadyToBuy, currentAction]);
 
   if (!sourceToken) return null;
   return (

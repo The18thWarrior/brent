@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Wrapper from "./wrapper";
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { wagmiAdapter, projectId } from '@/config'
 import { QueryClient } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
@@ -12,7 +12,6 @@ import { headers } from 'next/headers' // added
 import ContextProvider from "./context";
 
 // Set up queryClient
-const queryClient = new QueryClient()
 
 if (!projectId) {
   throw new Error('Project ID is not defined')
@@ -27,7 +26,7 @@ const appkitMetadata = {
 }
 
 // Create the modal
-const modal = createAppKit({
+createAppKit({
   adapters: [wagmiAdapter],
   projectId,
   networks: [mainnet, arbitrum, avalanche, base, optimism, polygon],

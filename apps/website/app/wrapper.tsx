@@ -3,16 +3,13 @@
 import Header from './header';
 import { Box, CssBaseline, Stack } from '@mui/material';
 import { ThemeSwitcherProvider } from '@/hooks/useThemeSwitcher';
-import { usePathname } from 'next/navigation';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 export default function Wrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const hideMenu = pathname === '/' || pathname === '/sign-in' || pathname === '/sign-up' || pathname === '/forgot-password' || pathname === '/reset-password' || pathname === '/verify-email' || pathname === '/privacy' || pathname === '/onboarding'
   
   return (
     <Box>

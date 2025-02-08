@@ -52,7 +52,7 @@ const ResultItem = ({token, sourceToken, metadataMap, metadataByAddress, setFee}
       }
     };
     if (sourceToken && token) fetchPools();
-  }, [token, sourceToken]);
+  }, [token, sourceToken,setFee, sourceMetadata, tokenMetadata]);
 
 
   if (!hasPool) return null;

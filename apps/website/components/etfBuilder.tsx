@@ -20,7 +20,6 @@ const ETFBuilder: React.FC = () => {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('draft' as 'draft' | 'generating' | 'edit' );
   const [loadingText, setLoadingText] = useState("");
   const [walletConversationResponse, setWalletConversationResponse] = useState([] as ChatCompletionMessageParam[]);
@@ -43,7 +42,6 @@ const ETFBuilder: React.FC = () => {
   };
   
   const executeAnalysis = async () => {
-    setLoading(true);
     setStatus('generating');
     setLoadingText("Evaluating your investing philosophy...");
     //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
@@ -55,7 +53,6 @@ const ETFBuilder: React.FC = () => {
       setError(walletData);
       setOpenSnackbar(true);
       setStatus('draft');
-      setLoading(false);
       return;
     }
     setWalletConversationResponse(walletData.messages);
@@ -67,7 +64,6 @@ const ETFBuilder: React.FC = () => {
       setError(walletSummary);
       setOpenSnackbar(true);
       setStatus('draft');
-      setLoading(false);
       return;
     }
     setLoadingText("Generating a token list for you...");
@@ -77,7 +73,6 @@ const ETFBuilder: React.FC = () => {
       setError(tokenData);
       setOpenSnackbar(true);
       setStatus('draft');
-      setLoading(false);
       return;
     }
     setTokenConversationResponse(tokenData.messages);
@@ -91,7 +86,6 @@ const ETFBuilder: React.FC = () => {
       setError(generatedData);
       setOpenSnackbar(true);
       setStatus('draft');
-      setLoading(false);
       return;
     }
 
@@ -100,8 +94,6 @@ const ETFBuilder: React.FC = () => {
     
     //setResponse([result.messages[result.messages.length - 1]]);
     setStatus('edit');   
-      
-    setLoading(false);
   }
 
   const handleCloseSnackbar = () => {

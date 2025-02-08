@@ -53,7 +53,7 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
     try {
       setAmount(Number(event.target.value));
     } catch (error) {
-      console.error("Invalid input: ", event.target.value);
+      console.error("Invalid input: ", error);
     }
   }
 
