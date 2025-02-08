@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "enrich:gecko": "tsx ./coingeckoDataEnrichment.ts",
-    "enrich:llm": "tsx ./generateRiskCategory.ts",
-    "build": "tsc"
+    "enrich:llm": "tsx ./generateRiskCategory.ts"
   },
   "author": "JP",
   "license": "MIT",
