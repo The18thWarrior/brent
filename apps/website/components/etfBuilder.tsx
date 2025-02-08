@@ -92,6 +92,7 @@ const ETFBuilder: React.FC = () => {
     const result2 = await runOutputGenerator(tokenData.messages);
     console.log(result2);
     setGeneratedData(JSON.stringify(result2));
+    setTabValue('results');
     
     //setResponse([result.messages[result.messages.length - 1]]);
     setStatus('edit');   
@@ -106,6 +107,10 @@ const ETFBuilder: React.FC = () => {
   const handleRefresh = () => {
     setStatus('draft');
     setSummary('');
+    setWalletConversationResponse([]);
+    setTokenConversationResponse([]);
+    setGeneratedData('');
+    setTabValue('loading');
   }
 
   const RefreshButton = () => {
@@ -117,7 +122,7 @@ const ETFBuilder: React.FC = () => {
   }
 
   return (
-    <Box width={'35vw'}>
+    <Box width={'55vw'}>
         {status === 'draft' && false &&
           <form
             onSubmit={handleSubmit}
@@ -167,26 +172,24 @@ const ETFBuilder: React.FC = () => {
              <TabContext value={tabValue}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="Game" value="loading" />
+                  {generatedData.length === 0 && <Tab label="Game" value="loading" />}
+                  {generatedData.length > 0 && <Tab label="Results" value="results" />}
                   <Tab label="Wallet Agent" value="walletHistory" />
                   <Tab label="Token Agent" value="tokenHistory" />
-                  {generatedData.length > 0 && <Tab label="Results" value="results" />}
                 </TabList>
               </Box>
-              <TabPanel value="loading">
-                <Box>
-                  <Typography variant={'h5'} textAlign={'center'} sx={{pb:2}}>{loadingText}</Typography>
-                  <LoadingComponent />
-                </Box>
-              </TabPanel>
+              {generatedData.length === 0 && 
+                <TabPanel value="loading">
+                  <Box>
+                    <Typography variant={'h6'} textAlign={'center'} sx={{pb:2}}>{loadingText}</Typography>
+                    <LoadingComponent />
+                  </Box>
+                </TabPanel>
+              }
               <TabPanel value="walletHistory"><ConversationHistory conversation={walletConversationResponse} /></TabPanel>
               <TabPanel value="tokenHistory"><ConversationHistory conversation={tokenConversationResponse} /></TabPanel>
               <TabPanel value="results">
                 <Box>
-                  <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-                    <Typography variant={'h5'}>Investing Philosophy Summary</Typography>
-                    <RefreshButton />
-                  </Stack>
                   {generatedData.length > 0 && <ResultsList refresh={handleRefresh} source={JSON.parse(generatedData) as SourceList}/>}
                 </Box>
               </TabPanel>

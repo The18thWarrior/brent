@@ -10,6 +10,9 @@ import summaryEvaluator from './agents/summaryEvaluator.ts';
 import outputGenerator from './agents/outputGenerator.ts';
 import tokenCategorizer from './agents/tokenCategorizer.ts';
 
+import polygonTokens from './data/polygon.json';
+import baseTokens from './data/base.json';
+
 export const createIndexFundFlow = createIndexFund;
 export const createIndexFundDirectFlow = createIndexFundDirect;
 export const formatOutputFlow = formatOutput;
@@ -21,3 +24,6 @@ export const walletResearcherAgent = walletResearcher;
 export const tokenResearcherAgent = tokenResearcher;
 export const summaryEvaluatorAgent = summaryEvaluator;
 export const outputGeneratorAgent = outputGenerator;
+
+export const polygonCoins = polygonTokens;
+export const baseCoins = baseTokens;

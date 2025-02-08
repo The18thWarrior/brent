@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Avatar, Box, Button, ButtonBase, IconButton, Menu, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, ButtonBase, Divider, IconButton, Menu, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { SourceList, Token } from '@/services/types';
 import ResultItem from './resultItem';
 import { Refresh } from '@mui/icons-material';
 import { BuyButton } from '../buyButton';
 import { parseUnits } from 'viem';
+import { polygonCoins, baseCoins } from '@brent/index-builder';
 
 const sourceTokens: Token[] = [
   {
@@ -54,6 +55,10 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
     }
   }
 
+  const coins = polygonCoins.reduce((acc, coin) => {
+    acc[coin.address] = {...coin, category: coin.tags};
+    return acc;
+  }, {} as {[key: string]: Token});
 
   return (
     <Stack direction={'column'} spacing={2} >
@@ -88,18 +93,22 @@ const ResultsList = ({source, refresh}: {source: SourceList | null, refresh: () 
           </MenuItem>
         ))}
       </Menu>
+      
+      <Divider sx={{my:3}} />
 
       <Stack direction={'column'} spacing={2} justifyContent={'center'} alignItems={'center'}>
         {source && sourceToken && source.tokens.map((token, index) => {
           return (
-            <ResultItem key={index} token={token} sourceToken={sourceToken} setFee={handleFeeChange} />
+            <ResultItem key={index} token={token} metadataMap={coins} sourceToken={sourceToken} setFee={handleFeeChange} />
           )
         })}
       </Stack>
       <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
-        <TextField id="amount" label="Amount"type={'number'} value={amount} onChange={handleAmountChange} />
         {sourceToken && Object.keys(feeList).length > 0 && source && 
-          <BuyButton sourceToken={sourceToken} tokenList={source.tokens} amount={parseUnits(amount.toString(), sourceToken.decimals)} fees={feeList} />
+          <TextField id="amount" label="Amount"type={'number'} value={amount} onChange={handleAmountChange} />
+        }
+        {sourceToken && Object.keys(feeList).length > 0 && source && 
+          <BuyButton sourceToken={sourceToken}  tokenList={source.tokens} amount={parseUnits(amount.toString(), sourceToken.decimals)} fees={feeList} />
         }
       </Stack>
     </Stack>

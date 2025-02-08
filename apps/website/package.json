@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@brent/index-builder": "workspace:*",
-    "@covalenthq/ai-agent-sdk": "^0.2.5",
+    "@covalenthq/ai-agent-sdk": "^0.2.6",
     "@cowprotocol/cow-runner-game": "^0.2.9",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

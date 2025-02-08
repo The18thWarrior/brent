@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { Avatar, Box, Button, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { SourceList, Token, Token2 } from '@/services/types';
 import { queryPools } from '@/services/poolChecker';
-import { formatEther } from 'viem'
+import { formatEther, formatGwei } from 'viem'
 import { useAccount } from 'wagmi';
 import { Delete } from '@mui/icons-material';
 
-const ResultItem = ({token, sourceToken, setFee}: {token: Token, sourceToken: Token, setFee: (address: string, fee: number) => void}) => {
+const ResultItem = ({token, sourceToken, metadataMap, setFee}: {token: Token, sourceToken: Token, metadataMap: {[key: string]: Token}, setFee: (address: string, fee: number) => void}) => {
   const [poolFee, setPoolFee] = React.useState(0);
   const [poolLiquidity, setPoolLiquidity] = React.useState(BigInt(0));
   const [hasPool, setHasPool] = React.useState(false);
@@ -38,7 +38,6 @@ const ResultItem = ({token, sourceToken, setFee}: {token: Token, sourceToken: To
           setPoolLiquidity(_liquidity);
           setHasPool(true);
           setFee(token.address, poolData.feeTier);
-          console.log('token w/ data', token, poolData);
         }
       } else {
         setHasNoPool();
@@ -47,14 +46,16 @@ const ResultItem = ({token, sourceToken, setFee}: {token: Token, sourceToken: To
     if (sourceToken && token) fetchPools();
   }, [token, sourceToken]);
 
+  const metadata = metadataMap[token.address];
+
   if (!hasPool) return null;
   return (
-  <Tooltip title={`${token.description} | Pool Fee: ${poolFee/1000}%`} placement="top">
+  <Tooltip title={`${token.description || metadata.description} | Pool Fee: ${poolFee/1000}% | Liquidity: ${formatGwei(poolLiquidity)}`} placement="top">
     <Box display="flex" justifyContent="center" alignItems="center" width={'100%'} >
       <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" width={'100%'}>
-        <Avatar src={token.logo} sx={{ width: 24, height: 24 }} />
-        <Typography color='text.primary'>{token.name}</Typography>
-        <Typography color='text.primary'>{formatEther(poolLiquidity)}</Typography>        
+        <Avatar src={token.logo || metadata.logo} sx={{ width: 24, height: 24 }} />
+        <Typography color='text.primary'>{token.name || metadata.name}</Typography>
+        {/* <Typography color='text.primary'>{poolLiquidity}</Typography>         */}
         <IconButton onClick={deletePool}><Delete /></IconButton>
       </Stack>
     </Box>

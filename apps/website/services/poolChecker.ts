@@ -51,7 +51,7 @@ export const queryPools = async ({
       });
   
       const liquidityValue = BigInt(liquidity as bigint);
-      console.log('pool', poolAddress, 'token', targetToken,'liquidityValue', liquidityValue);
+      //console.log('pool', poolAddress, 'token', targetToken,'liquidityValue', liquidityValue);
       if (liquidityValue > BigInt(0)) {
         const data = {
           id: poolAddress,

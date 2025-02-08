@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@covalenthq/ai-agent-sdk':
-        specifier: ^0.2.5
-        version: 0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        specifier: ^0.2.6
+        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -106,8 +106,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/index-builder
       '@covalenthq/ai-agent-sdk':
-        specifier: ^0.2.5
-        version: 0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        specifier: ^0.2.6
+        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -176,8 +176,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/index-builder
       '@covalenthq/ai-agent-sdk':
-        specifier: ^0.2.5
-        version: 0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        specifier: ^0.2.6
+        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@cowprotocol/cow-runner-game':
         specifier: ^0.2.9
         version: 0.2.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -302,8 +302,8 @@ importers:
   packages/index-builder:
     dependencies:
       '@covalenthq/ai-agent-sdk':
-        specifier: ^0.2.5
-        version: 0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        specifier: ^0.2.6
+        version: 0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@covalenthq/client-sdk':
         specifier: ^2.2.3
         version: 2.2.3
@@ -606,6 +606,9 @@ packages:
 
   '@covalenthq/ai-agent-sdk@0.2.5':
     resolution: {integrity: sha512-vYThmLQPkQabLc5Zb6VGSg3eFyzRicaLgEsVdNbd38T5LjyMEfbb0m85LfLCKVEoQ+TClzj/k7ysF+DZDPuIBQ==}
+
+  '@covalenthq/ai-agent-sdk@0.2.6':
+    resolution: {integrity: sha512-QdUC/7kUYjkK+y70xuHWbhdaXZH4P0QX4aLveSLRbfHb6+pYirm7nZrvzBkIrGJNO9ZJQ9UraXZJmd81UhmdPQ==}
 
   '@covalenthq/client-sdk@2.2.3':
     resolution: {integrity: sha512-FwvlYpx5+Cr2f2aNNtfE8VYRn5Fr8I8SdY1Oq37tm5NSam0am8r1+zeC0Y2LVs9N/2vKJHoeOA+ivwf/uE6XSQ==}
@@ -6757,6 +6760,21 @@ snapshots:
       preact: 10.25.4
 
   '@covalenthq/ai-agent-sdk@0.2.5(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
+    dependencies:
+      '@covalenthq/client-sdk': 2.2.3
+      commander: 13.1.0
+      dotenv: 16.4.7
+      openai: 4.83.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.24.1)
+      pino: 9.6.0
+      pino-pretty: 13.0.0
+      typescript: 5.7.3
+      zod: 3.24.1
+      zod-to-json-schema: 3.24.1(zod@3.24.1)
+    transitivePeerDependencies:
+      - encoding
+      - ws
+
+  '@covalenthq/ai-agent-sdk@0.2.6(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
       '@covalenthq/client-sdk': 2.2.3
       commander: 13.1.0
