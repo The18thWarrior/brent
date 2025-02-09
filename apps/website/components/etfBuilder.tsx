@@ -63,6 +63,7 @@ const ETFBuilder: React.FC = () => {
       console.log('Wallet Summary:', walletSummary);
       if (typeof walletSummary === 'string') {
         setError(walletSummary);
+        setWalletConversationResponse([]);
         setOpenSnackbar(true);
         setStatus('draft');
         return;
@@ -72,6 +73,7 @@ const ETFBuilder: React.FC = () => {
       console.log(tokenData);
       if (typeof tokenData === 'string') {
         setError(tokenData);
+        setWalletConversationResponse([]);
         setOpenSnackbar(true);
         setStatus('draft');
         return;
@@ -85,6 +87,8 @@ const ETFBuilder: React.FC = () => {
 
       if (typeof generatedData === 'string') {
         setError(generatedData);
+        setWalletConversationResponse([]);
+        setTokenConversationResponse([]);
         setOpenSnackbar(true);
         setStatus('draft');
         return;
@@ -103,7 +107,7 @@ const ETFBuilder: React.FC = () => {
         setError(String(err));
       }
       setOpenSnackbar(true);
-      setStatus('draft');
+      handleRefresh();
       return;
     }   
   }
