@@ -1,8 +1,5 @@
 // Make sure to add OPENAI_API_KEY as a secret
 
-import {
-  OpenAI,
-} from "openai";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { runFlowTokens, runFlowWallet, runTokenOutputGenerator, runWalletOutputGenerator } from "@/services/package";
 
