@@ -4,7 +4,7 @@ import { Box, Button, Stack, Typography, useTheme, Tab } from "@mui/material";
 import {TabContext, TabList, TabPanel} from '@mui/lab';
 import React, { useState } from "react";
 import StyledTextArea from "./ui/StyledTextArea";
-import { runFlowWallet, runFlowTokens, runWalletOutputGenerator, runTokenOutputGenerator} from "@/services/package";
+import { runFlowWallet, runFlowTokens, runWalletOutputGenerator, runTokenOutputGenerator} from "@/services/api";
 import { useAccount } from "wagmi";
 import Snackbar from '@mui/material/Snackbar';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";

@@ -1,3 +1,5 @@
+'use client';
+
 export function distributeWeights(items: any[]): any[] {
   const totalWeight = 10000;
   const itemCount = items.length;
