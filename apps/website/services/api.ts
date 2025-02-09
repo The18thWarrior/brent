@@ -6,10 +6,13 @@ export async function runFlowTokens (
   text: string,
 ) {
   const sendMessage = await axios({
-    url: `/api/agent/runFlowTokens`,
+    url: `/api/agent`,
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "POST",
-    data: JSON.stringify({ text }),
-    timeout: 120000      
+    data: JSON.stringify({ text, type: 'runFlowTokens' }),
+    timeout: 300000      
   });
 
   return sendMessage.data;
@@ -19,10 +22,13 @@ export async function runFlowWallet (
   text: string,
 ) {
   const sendMessage = await axios({
-    url: `/api/agent/runFlowWallet`,
+    url: `/api/agent`,
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "POST",
-    data: JSON.stringify({ text }),
-    timeout: 120000      
+    data: JSON.stringify({ text, type: 'runFlowWallet' }),
+    timeout: 300000      
   });
 
   return sendMessage.data;
@@ -32,10 +38,13 @@ export async function runWalletOutputGenerator (
   messages: ChatCompletionMessageParam[]
 ) {
   const sendMessage = await axios({
-    url: `/api/agent/runWalletOutputGenerator`,
+    url: `/api/agent`,
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "POST",
-    data: JSON.stringify({ messages }),
-    timeout: 120000      
+    data: JSON.stringify({ messages, type: 'runWalletOutputGenerator' }),
+    timeout: 300000      
   });
 
   return sendMessage.data;
@@ -45,10 +54,13 @@ export async function runTokenOutputGenerator (
   messages: ChatCompletionMessageParam[]
 ) {
   const sendMessage = await axios({
-    url: `/api/agent/runTokenOutputGenerator`,
+    url: `/api/agent`,
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "POST",
-    data: JSON.stringify({ messages }),
-    timeout: 120000      
+    data: JSON.stringify({ messages, type: 'runTokenOutputGenerator' }),
+    timeout: 300000      
   });
 
   return sendMessage.data;
