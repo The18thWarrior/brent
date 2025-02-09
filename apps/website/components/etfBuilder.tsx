@@ -42,58 +42,70 @@ const ETFBuilder: React.FC = () => {
   };
   
   const executeAnalysis = async () => {
-    setStatus('generating');
-    setLoadingText("Evaluating your investing philosophy...");
-    //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
-    const data = `Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier on chain 'matic-mainnet'. Persist the wallet address and chain in the state.`;
-    console.log('running wallet data');
-    const walletData = await runFlowWallet(data);
-    console.log(walletData);
-    if (typeof walletData === 'string') {
-      setError(walletData);
+    try {
+      setStatus('generating');
+      setLoadingText("Evaluating your investing philosophy...");
+      //const result = await runFlowDirect(JSON.stringify({summary, walletAddress: address}));
+      const data = `Use the wallet address '${address}' to evaluate the investing philosophy of the wallet and give it a risk tier on chain 'matic-mainnet'. Persist the wallet address and chain in the state.`;
+      console.log('running wallet data');
+      const walletData = await runFlowWallet(data);
+      console.log(walletData);
+      if (typeof walletData === 'string') {
+        setError(walletData);
+        setOpenSnackbar(true);
+        setStatus('draft');
+        return;
+      }
+      setWalletConversationResponse(walletData.messages);
+      console.log('running token data')
+
+      const walletSummary = await runWalletOutputGenerator(walletData.messages);
+      console.log('Wallet Summary:', walletSummary);
+      if (typeof walletSummary === 'string') {
+        setError(walletSummary);
+        setOpenSnackbar(true);
+        setStatus('draft');
+        return;
+      }
+      setLoadingText("Generating a token list for you...");
+      const tokenData = await runFlowTokens(JSON.stringify(walletSummary));
+      console.log(tokenData);
+      if (typeof tokenData === 'string') {
+        setError(tokenData);
+        setOpenSnackbar(true);
+        setStatus('draft');
+        return;
+      }
+      setTokenConversationResponse(tokenData.messages);
+
+      setLoadingText("Validating the token list...");
+      console.log('running output generator');
+      const generatedData = await runTokenOutputGenerator(tokenData.messages);
+      console.log('generated data',generatedData);
+
+      if (typeof generatedData === 'string') {
+        setError(generatedData);
+        setOpenSnackbar(true);
+        setStatus('draft');
+        return;
+      }
+
+      setGeneratedData(JSON.stringify(generatedData));
+      setTabValue('results');
+      
+      //setResponse([result.messages[result.messages.length - 1]]);
+      setStatus('edit');
+    } catch (err) {
+      console.error(err);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(String(err));
+      }
       setOpenSnackbar(true);
       setStatus('draft');
       return;
-    }
-    setWalletConversationResponse(walletData.messages);
-    console.log('running token data')
-
-    const walletSummary = await runWalletOutputGenerator(walletData.messages);
-    console.log('Wallet Summary:', walletSummary);
-    if (typeof walletSummary === 'string') {
-      setError(walletSummary);
-      setOpenSnackbar(true);
-      setStatus('draft');
-      return;
-    }
-    setLoadingText("Generating a token list for you...");
-    const tokenData = await runFlowTokens(JSON.stringify(walletSummary));
-    console.log(tokenData);
-    if (typeof tokenData === 'string') {
-      setError(tokenData);
-      setOpenSnackbar(true);
-      setStatus('draft');
-      return;
-    }
-    setTokenConversationResponse(tokenData.messages);
-
-    setLoadingText("Validating the token list...");
-    console.log('running output generator');
-    const generatedData = await runTokenOutputGenerator(tokenData.messages);
-    console.log('generated data',generatedData);
-
-    if (typeof generatedData === 'string') {
-      setError(generatedData);
-      setOpenSnackbar(true);
-      setStatus('draft');
-      return;
-    }
-
-    setGeneratedData(JSON.stringify(generatedData));
-    setTabValue('results');
-    
-    //setResponse([result.messages[result.messages.length - 1]]);
-    setStatus('edit');   
+    }   
   }
 
   const handleCloseSnackbar = () => {
