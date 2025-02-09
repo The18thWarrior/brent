@@ -2,6 +2,8 @@
 import axios from "axios";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
+const timeout = 300000;
+
 export async function runFlowTokens (
   text: string,
 ) {
@@ -12,7 +14,7 @@ export async function runFlowTokens (
     },
     method: "POST",
     data: JSON.stringify({ text, type: 'runFlowTokens' }),
-    timeout: 300000      
+    timeout      
   });
 
   return sendMessage.data;
@@ -28,7 +30,7 @@ export async function runFlowWallet (
     },
     method: "POST",
     data: JSON.stringify({ text, type: 'runFlowWallet' }),
-    timeout: 300000      
+    timeout      
   });
 
   return sendMessage.data;
@@ -44,7 +46,7 @@ export async function runWalletOutputGenerator (
     },
     method: "POST",
     data: JSON.stringify({ messages, type: 'runWalletOutputGenerator' }),
-    timeout: 300000      
+    timeout   
   });
 
   return sendMessage.data;
@@ -60,7 +62,7 @@ export async function runTokenOutputGenerator (
     },
     method: "POST",
     data: JSON.stringify({ messages, type: 'runTokenOutputGenerator' }),
-    timeout: 300000      
+    timeout 
   });
 
   return sendMessage.data;
